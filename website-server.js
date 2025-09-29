@@ -6,7 +6,7 @@ const morgan = require('morgan');
 const path = require('path');
 
 const app = express();
-const PORT = process.env.WEBSITE_PORT || 3346;
+const PORT = process.env.PORT || 3346;
 
 // Security middleware
 app.use(helmet({
@@ -105,10 +105,14 @@ app.use((err, req, res, next) => {
 
 // Start server
 app.listen(PORT, () => {
-    console.log(`🌐 Public Website Server running on port ${PORT}`);
-    console.log(`📱 Website: http://localhost:${PORT}`);
-    console.log(`🔗 API Backend: http://localhost:3344`);
-    console.log(`📊 App Server: http://localhost:3345`);
+    console.log(`🌐 SmartStart Website Server running on port ${PORT}`);
+    if (process.env.NODE_ENV === 'production') {
+        console.log(`🚀 Production deployment ready`);
+    } else {
+        console.log(`📱 Website: http://localhost:${PORT}`);
+        console.log(`🔗 API Backend: http://localhost:3344`);
+        console.log(`📊 App Server: http://localhost:3345`);
+    }
 });
 
 module.exports = app;
