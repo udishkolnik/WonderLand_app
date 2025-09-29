@@ -56,7 +56,8 @@
     <div style="text-align: center; display: flex; gap: 2rem; justify-content: center; flex-wrap: wrap;">
       <!-- SmartStart Enthusiastic Button -->
       <button 
-        onclick="window.open('https://billing.zohosecure.ca/subscribe/80acd4f75fc11ade8382abc9ca5c205ef35c7564ff13c9670befed3afeaa53b9/Plan010')"
+        id="subscribe-enthusiastic"
+        data-url="https://billing.zohosecure.ca/subscribe/80acd4f75fc11ade8382abc9ca5c205ef35c7564ff13c9670befed3afeaa53b9/Plan010"
         style="
           background: var(--accent-green);
           color: white;
@@ -70,15 +71,14 @@
           box-shadow: 0 6px 20px rgba(0, 255, 0, 0.3);
           min-width: 280px;
         "
-        onmouseover="this.style.transform='translateY(-3px)'; this.style.boxShadow='0 8px 25px rgba(0, 255, 0, 0.4)'"
-        onmouseout="this.style.transform='translateY(0)'; this.style.boxShadow='0 6px 20px rgba(0, 255, 0, 0.3)'"
       >
         Subscribe - SmartStart Enthusiastic
       </button>
       
       <!-- Test Button -->
       <button 
-        onclick="window.open('https://billing.zohosecure.ca/subscribe/80acd4f75fc11ade8382abc9ca5c205ef35c7564ff13c9670befed3afeaa53b9/TST001')"
+        id="subscribe-test"
+        data-url="https://billing.zohosecure.ca/subscribe/80acd4f75fc11ade8382abc9ca5c205ef35c7564ff13c9670befed3afeaa53b9/TST001"
         style="
           background: var(--accent-cyan);
           color: white;
@@ -92,8 +92,6 @@
           box-shadow: 0 6px 20px rgba(0, 255, 255, 0.3);
           min-width: 280px;
         "
-        onmouseover="this.style.transform='translateY(-3px)'; this.style.boxShadow='0 8px 25px rgba(0, 255, 255, 0.4)'"
-        onmouseout="this.style.transform='translateY(0)'; this.style.boxShadow='0 6px 20px rgba(0, 255, 255, 0.3)'"
       >
         Subscribe - Test
       </button>
@@ -387,5 +385,47 @@
 
     <script src="assets/js/components.js"></script>
     <script src="assets/js/script.js"></script>
+    
+    <script>
+        // Handle subscription button clicks
+        document.addEventListener('DOMContentLoaded', function() {
+            const enthusiasticBtn = document.getElementById('subscribe-enthusiastic');
+            const testBtn = document.getElementById('subscribe-test');
+            
+            if (enthusiasticBtn) {
+                enthusiasticBtn.addEventListener('click', function() {
+                    window.open(this.getAttribute('data-url'), '_blank');
+                });
+                
+                // Add hover effects
+                enthusiasticBtn.addEventListener('mouseover', function() {
+                    this.style.transform = 'translateY(-3px)';
+                    this.style.boxShadow = '0 8px 25px rgba(0, 255, 0, 0.4)';
+                });
+                
+                enthusiasticBtn.addEventListener('mouseout', function() {
+                    this.style.transform = 'translateY(0)';
+                    this.style.boxShadow = '0 6px 20px rgba(0, 255, 0, 0.3)';
+                });
+            }
+            
+            if (testBtn) {
+                testBtn.addEventListener('click', function() {
+                    window.open(this.getAttribute('data-url'), '_blank');
+                });
+                
+                // Add hover effects
+                testBtn.addEventListener('mouseover', function() {
+                    this.style.transform = 'translateY(-3px)';
+                    this.style.boxShadow = '0 8px 25px rgba(0, 255, 255, 0.4)';
+                });
+                
+                testBtn.addEventListener('mouseout', function() {
+                    this.style.transform = 'translateY(0)';
+                    this.style.boxShadow = '0 6px 20px rgba(0, 255, 255, 0.3)';
+                });
+            }
+        });
+    </script>
 </body>
 </html>

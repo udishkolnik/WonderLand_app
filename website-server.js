@@ -16,6 +16,7 @@ app.use(helmet({
             styleSrc: ["'self'", "'unsafe-inline'", "https://fonts.googleapis.com", "https://cdnjs.cloudflare.com", "https://js.zohostatic.com", "https://*.zohostatic.com"],
             fontSrc: ["'self'", "https://fonts.gstatic.com", "https://cdnjs.cloudflare.com"],
             scriptSrc: ["'self'", "'unsafe-inline'", "'unsafe-eval'", "https://cdnjs.cloudflare.com", "https://js.zohostatic.com", "https://billing.zohocloud.ca", "https://*.zohostatic.com", "https://*.zohocloud.ca"],
+            scriptSrcAttr: ["'unsafe-inline'"],
             imgSrc: ["'self'", "data:", "https:"],
             connectSrc: ["'self'", "http://localhost:3344", "http://localhost:3345", "https://billing.zohocloud.ca", "https://*.zohocloud.ca", "https://*.zohostatic.com"],
             objectSrc: ["'none'"],
