@@ -1,23 +1,22 @@
 {
-  "name": "smartstart-webapp",
+  "name": "smartstart-website",
   "version": "1.0.0",
-  "description": "SmartStart Platform - Micro-venture studio webapp by AliceSolutionsGroup",
-  "main": "server.js",
+  "description": "SmartStart Platform Website - Micro-venture studio platform",
+  "main": "website-server.js",
   "scripts": {
-    "start": "node server.js",
-    "dev": "nodemon server.js",
-    "build": "echo 'Build complete'",
-    "test": "echo 'No tests specified'"
+    "start": "node website-server.js",
+    "dev": "node website-server.js",
+    "build": "echo 'No build step required for static website'",
+    "test": "echo 'No tests configured'"
   },
   "keywords": [
+    "micro-venture-studio",
+    "startup-incubator",
     "smartstart",
     "alicesolutionsgroup",
-    "venture",
-    "saas",
-    "micro-venture",
-    "collaboration"
+    "website"
   ],
-  "author": "Udi Shkolnik <info@alicesolutionsgroup.com>",
+  "author": "Udi Shkolnik, AliceSolutionsGroup",
   "license": "MIT",
   "dependencies": {
     "express": "^4.18.2",
@@ -26,10 +25,13 @@
     "compression": "^1.7.4",
     "morgan": "^1.10.0"
   },
-  "devDependencies": {
-    "nodemon": "^3.0.2"
-  },
   "engines": {
-    "node": ">=16.0.0"
-  }
+    "node": ">=18.0.0",
+    "npm": ">=8.0.0"
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/udishkolnik/WonderLand_app.git"
+  },
+  "homepage": "https://github.com/udishkolnik/WonderLand_app#readme"
 }
