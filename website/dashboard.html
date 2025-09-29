@@ -1,0 +1,605 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+ <meta charset="UTF-8">
+ <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>SmartStart Platform | AliceSolutionsGroup</title>
+ <meta name="description" content="Your SmartStart dashboard - track your venture journey, manage your projects, and collaborate with your team.">
+ <meta name="keywords" content="dashboard, SmartStart, AliceSolutionsGroup, venture management, user journey">
+ <meta name="author" content="Udi Shkolnik, AliceSolutionsGroup">
+ <meta name="robots" content="index, follow">
+ 
+ <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+ <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+ <link rel="stylesheet" href="assets/css/styles.css">
+ <link rel="icon" type="image/svg+xml" href="favicon.svg">
+ <link rel="icon" type="image/x-icon" href="favicon.ico">
+ <style>
+  .dashboard-container {
+   min-height: 100vh;
+   background: var(--bg-primary);
+   padding: 2rem 0;
+  }
+  
+  .dashboard-header {
+   background: var(--glass-bg);
+   border: 1px solid var(--glass-border);
+   border-radius: 20px;
+   padding: 2rem;
+   margin-bottom: 2rem;
+   backdrop-filter: blur(20px);
+   box-shadow: var(--shadow-neon-teal);
+  }
+  
+  .dashboard-welcome {
+   display: flex;
+   justify-content: space-between;
+   align-items: center;
+   margin-bottom: 1rem;
+  }
+  
+  .welcome-text h1 {
+   font-size: 2rem;
+   font-weight: 700;
+   background: var(--gradient-multi);
+   background-size: 400% 400%;
+   -webkit-background-clip: text;
+   -webkit-text-fill-color: transparent;
+   background-clip: text;
+   margin-bottom: 0.5rem;
+   animation: gradientShift 8s ease infinite;
+  }
+  
+  .welcome-text p {
+   color: var(--text-secondary);
+   font-size: 1rem;
+  }
+  
+  .user-avatar {
+   width: 60px;
+   height: 60px;
+   border-radius: 50%;
+   background: var(--gradient-multi);
+   display: flex;
+   align-items: center;
+   justify-content: center;
+   font-size: 1.5rem;
+   color: var(--bg-primary);
+   font-weight: 700;
+   box-shadow: var(--shadow-neon-teal);
+   animation: neonPulse 3s ease-in-out infinite;
+  }
+  
+  .dashboard-stats {
+   display: grid;
+   grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+   gap: 1rem;
+   margin-bottom: 2rem;
+  }
+  
+  .stat-card {
+   background: var(--glass-bg);
+   border: 1px solid var(--glass-border);
+   border-radius: 15px;
+   padding: 1.5rem;
+   backdrop-filter: blur(20px);
+   text-align: center;
+   transition: all 0.3s ease;
+   box-shadow: var(--shadow-md);
+  }
+  
+  .stat-card:hover {
+   transform: translateY(-5px);
+   border-color: var(--color-neon-teal);
+   box-shadow: var(--shadow-neon-teal);
+  }
+  
+  .stat-number {
+   font-size: 2rem;
+   font-weight: 700;
+   color: var(--color-neon-teal);
+   margin-bottom: 0.5rem;
+   text-shadow: var(--shadow-neon-teal);
+  }
+  
+  .stat-label {
+   color: var(--text-secondary);
+   font-size: 0.875rem;
+  }
+  
+  .dashboard-content {
+   display: grid;
+   grid-template-columns: 2fr 1fr;
+   gap: 2rem;
+  }
+  
+  .main-content {
+   display: flex;
+   flex-direction: column;
+   gap: 2rem;
+  }
+  
+  .sidebar {
+   display: flex;
+   flex-direction: column;
+   gap: 2rem;
+  }
+  
+  .content-card {
+   background: var(--glass-bg);
+   border: 1px solid var(--glass-border);
+   border-radius: 20px;
+   padding: 2rem;
+   backdrop-filter: blur(20px);
+   box-shadow: var(--shadow-md);
+   transition: all 0.3s ease;
+  }
+  
+  .content-card:hover {
+   box-shadow: var(--shadow-neon-teal);
+   border-color: var(--color-neon-teal);
+  }
+  
+  .card-header {
+   display: flex;
+   justify-content: space-between;
+   align-items: center;
+   margin-bottom: 1.5rem;
+  }
+  
+  .card-title {
+   font-size: 1.25rem;
+   font-weight: 600;
+   color: var(--text-primary);
+  }
+  
+  .card-action {
+   color: var(--color-neon-teal);
+   text-decoration: none;
+   font-size: 0.875rem;
+   transition: color 0.3s ease;
+  }
+  
+  .card-action:hover {
+   color: var(--color-neon-yellow);
+  }
+  
+  .journey-progress {
+   margin-bottom: 2rem;
+  }
+  
+  .progress-item {
+   display: flex;
+   align-items: center;
+   gap: 1rem;
+   margin-bottom: 1rem;
+   padding: 1rem;
+   background: rgba(255, 255, 255, 0.05);
+   border-radius: 10px;
+   transition: all 0.3s ease;
+  }
+  
+  .progress-item:hover {
+   background: rgba(255, 255, 255, 0.1);
+  }
+  
+  .progress-icon {
+   width: 40px;
+   height: 40px;
+   border-radius: 50%;
+   background: var(--gradient-multi);
+   display: flex;
+   align-items: center;
+   justify-content: center;
+   color: var(--bg-primary);
+   font-size: 1rem;
+   box-shadow: var(--shadow-neon-teal);
+  }
+  
+  .progress-content h4 {
+   color: var(--text-primary);
+   margin-bottom: 0.25rem;
+  }
+  
+  .progress-content p {
+   color: var(--text-secondary);
+   font-size: 0.875rem;
+  }
+  
+  .progress-status {
+   margin-left: auto;
+   padding: 0.25rem 0.75rem;
+   border-radius: 15px;
+   font-size: 0.75rem;
+   font-weight: 600;
+  }
+  
+  .progress-status.completed {
+   background: rgba(0, 255, 132, 0.2);
+   color: var(--color-neon-green);
+   border: 1px solid var(--color-neon-green);
+  }
+  
+  .progress-status.in-progress {
+   background: rgba(0, 229, 212, 0.2);
+   color: var(--color-neon-teal);
+   border: 1px solid var(--color-neon-teal);
+  }
+  
+  .progress-status.pending {
+   background: rgba(255, 211, 0, 0.2);
+   color: var(--color-neon-yellow);
+   border: 1px solid var(--color-neon-yellow);
+  }
+  
+  .ventures-list {
+   display: flex;
+   flex-direction: column;
+   gap: 1rem;
+  }
+  
+  .venture-item {
+   display: flex;
+   align-items: center;
+   gap: 1rem;
+   padding: 1rem;
+   background: rgba(255, 255, 255, 0.05);
+   border-radius: 10px;
+   transition: all 0.3s ease;
+  }
+  
+  .venture-item:hover {
+   background: rgba(255, 255, 255, 0.1);
+  }
+  
+  .venture-icon {
+   width: 40px;
+   height: 40px;
+   border-radius: 50%;
+   background: var(--gradient-multi);
+   display: flex;
+   align-items: center;
+   justify-content: center;
+   color: var(--bg-primary);
+   font-size: 1rem;
+   box-shadow: var(--shadow-neon-purple);
+  }
+  
+  .venture-content h4 {
+   color: var(--text-primary);
+   margin-bottom: 0.25rem;
+  }
+  
+  .venture-content p {
+   color: var(--text-secondary);
+   font-size: 0.875rem;
+  }
+  
+  .venture-status {
+   margin-left: auto;
+   padding: 0.25rem 0.75rem;
+   border-radius: 15px;
+   font-size: 0.75rem;
+   font-weight: 600;
+  }
+  
+  .venture-status.idea {
+   background: rgba(255, 211, 0, 0.2);
+   color: var(--color-neon-yellow);
+   border: 1px solid var(--color-neon-yellow);
+  }
+  
+  .venture-status.development {
+   background: rgba(0, 229, 212, 0.2);
+   color: var(--color-neon-teal);
+   border: 1px solid var(--color-neon-teal);
+  }
+  
+  .venture-status.launched {
+   background: rgba(0, 255, 132, 0.2);
+   color: var(--color-neon-green);
+   border: 1px solid var(--color-neon-green);
+  }
+  
+  .quick-actions {
+   display: grid;
+   grid-template-columns: 1fr 1fr;
+   gap: 1rem;
+  }
+  
+  .quick-action {
+   display: flex;
+   flex-direction: column;
+   align-items: center;
+   gap: 0.5rem;
+   padding: 1.5rem;
+   background: rgba(255, 255, 255, 0.05);
+   border-radius: 15px;
+   text-decoration: none;
+   color: var(--text-primary);
+   transition: all 0.3s ease;
+  }
+  
+  .quick-action:hover {
+   background: rgba(255, 255, 255, 0.1);
+   transform: translateY(-2px);
+  }
+  
+  .quick-action-icon {
+   width: 40px;
+   height: 40px;
+   border-radius: 50%;
+   background: var(--gradient-multi);
+   display: flex;
+   align-items: center;
+   justify-content: center;
+   color: var(--bg-primary);
+   font-size: 1.25rem;
+   box-shadow: var(--shadow-neon-green);
+  }
+  
+  .quick-action-text {
+   font-size: 0.875rem;
+   font-weight: 500;
+   text-align: center;
+  }
+  
+  .logout-btn {
+   background: transparent;
+   border: 1px solid #FF3B3B;
+   color: #FF3B3B;
+   padding: 0.5rem 1rem;
+   border-radius: 8px;
+   cursor: pointer;
+   font-size: 0.875rem;
+   transition: all 0.3s ease;
+  }
+  
+  .logout-btn:hover {
+   background: #FF3B3B;
+   color: var(--bg-primary);
+   box-shadow: 0 0 12px rgba(255, 59, 59, 0.6);
+  }
+  
+  @media (max-width: 768px) {
+   .dashboard-content {
+    grid-template-columns: 1fr;
+   }
+   
+   .dashboard-welcome {
+    flex-direction: column;
+    gap: 1rem;
+    text-align: center;
+   }
+   
+   .quick-actions {
+    grid-template-columns: 1fr;
+   }
+  }
+ </style>
+</head>
+<body>
+    <div id="global-header"></div>
+
+ <div class="dashboard-container">
+  <div class="container">
+   <!-- Dashboard Header -->
+   <div class="dashboard-header">
+    <div class="dashboard-welcome">
+     <div class="welcome-text">
+      <h1 id="welcomeTitle">Welcome back!</h1>
+      <p id="welcomeSubtitle">Ready to continue your SmartStart journey?</p>
+     </div>
+     <div class="user-avatar" id="userAvatar">U</div>
+    </div>
+    <button class="logout-btn" onclick="logout()">Logout</button>
+   </div>
+
+   <!-- Dashboard Stats -->
+   <div class="dashboard-stats">
+    <div class="stat-card">
+     <div class="stat-number" id="totalVentures">0</div>
+     <div class="stat-label">Total Ventures</div>
+    </div>
+    <div class="stat-card">
+     <div class="stat-number" id="completedStages">0</div>
+     <div class="stat-label">Completed Stages</div>
+    </div>
+    <div class="stat-card">
+     <div class="stat-number" id="activeCollaborations">0</div>
+     <div class="stat-label">Active Collaborations</div>
+    </div>
+    <div class="stat-card">
+     <div class="stat-number" id="daysActive">0</div>
+     <div class="stat-label">Days Active</div>
+    </div>
+   </div>
+
+   <!-- Dashboard Content -->
+   <div class="dashboard-content">
+    <div class="main-content">
+     <!-- Journey Progress -->
+     <div class="content-card">
+      <div class="card-header">
+       <h2 class="card-title">Your Journey Progress</h2>
+       <a href="user-journey/" class="card-action">View Full Journey →</a>
+      </div>
+      <div class="journey-progress" id="journeyProgress">
+       <!-- Journey progress items will be populated here -->
+      </div>
+     </div>
+
+     <!-- My Ventures -->
+     <div class="content-card">
+      <div class="card-header">
+       <h2 class="card-title">My Ventures</h2>
+       <a href="#" class="card-action" onclick="createNewVenture()">Create New →</a>
+      </div>
+      <div class="ventures-list" id="venturesList">
+       <!-- Ventures will be populated here -->
+      </div>
+     </div>
+    </div>
+
+    <div class="sidebar">
+     <!-- Quick Actions -->
+     <div class="content-card">
+      <div class="card-header">
+       <h2 class="card-title">Quick Actions</h2>
+      </div>
+      <div class="quick-actions">
+       <a href="user-journey/interactive-journey.html" class="quick-action">
+        <div class="quick-action-icon"> </div>
+        <div class="quick-action-text">Interactive Journey</div>
+       </a>
+       <a href="smartstart.html" class="quick-action">
+        <div class="quick-action-icon"> </div>
+        <div class="quick-action-text">SmartStart Guide</div>
+       </a>
+       <a href="pricing.html" class="quick-action">
+        <div class="quick-action-icon"> </div>
+        <div class="quick-action-text">Pricing</div>
+       </a>
+       <a href="ecosystem.html" class="quick-action">
+        <div class="quick-action-icon"> </div>
+        <div class="quick-action-text">Ecosystem</div>
+       </a>
+      </div>
+     </div>
+
+     <!-- Recent Activity -->
+     <div class="content-card">
+      <div class="card-header">
+       <h2 class="card-title">Recent Activity</h2>
+      </div>
+      <div id="recentActivity">
+       <!-- Recent activity will be populated here -->
+      </div>
+     </div>
+    </div>
+   </div>
+  </div>
+ </div>
+
+ 
+ <footer class="footer">
+  <div class="container">
+   <div class="footer-content">
+    <div class="footer-section">
+     <h3>AliceSolutionsGroup</h3>
+     <p>Micro-venture studio transforming practical product ideas into profitable SaaS businesses through structured collaboration and proven methodologies.</p>
+    </div>
+    <div class="footer-section">
+     <h3>Quick Links</h3>
+     <p><a href="index.html">Home</a></p>
+     <p><a href="ecosystem.html">Ecosystem</a></p>
+     <p><a href="business-model.html">Business Model</a></p>
+     <p><a href="venture-funnel.html">Venture Funnel</a></p>
+     <p><a href="smartstart.html">SmartStart</a></p>
+    </div>
+    <div class="footer-section">
+     <h3>Legal</h3>
+     <p><a href="legal.html">Terms of Service</a></p>
+     <p><a href="privacy.html">Privacy Policy</a></p>
+     <p><a href="contributor-agreement.html">Contributor Agreement</a></p>
+    </div>
+   </div>
+   <div class="footer-bottom">
+    <p>&copy; 2025 AliceSolutionsGroup. All rights reserved. | SmartStart by Udi Shkolnik | Status: Production Ready </p>
+   </div>
+  </div>
+ </footer>
+
+ <script src="assets/js/components.js"></script>
+ <script src="assets/js/script.js"></script>
+ <script src="assets/js/dashboard.js"></script>
+ <style>
+  .notification {
+   position: fixed;
+   top: 20px;
+   right: 20px;
+   background: var(--glass-bg);
+   border: 1px solid var(--glass-border);
+   border-radius: 10px;
+   padding: 1rem;
+   backdrop-filter: blur(20px);
+   box-shadow: var(--shadow-neon-teal);
+   z-index: 1000;
+   max-width: 300px;
+  }
+  
+  .notification-success {
+   border-color: var(--color-neon-green);
+   box-shadow: 0 0 20px rgba(0, 255, 132, 0.3);
+  }
+  
+  .notification-error {
+   border-color: #FF3B3B;
+   box-shadow: 0 0 20px rgba(255, 59, 59, 0.3);
+  }
+  
+  .notification-content {
+   display: flex;
+   justify-content: space-between;
+   align-items: center;
+   gap: 1rem;
+  }
+  
+  .notification-message {
+   color: var(--text-primary);
+   font-size: 0.875rem;
+  }
+  
+  .notification-close {
+   background: none;
+   border: none;
+   color: var(--text-secondary);
+   font-size: 1.2rem;
+   cursor: pointer;
+   padding: 0;
+   width: 20px;
+   height: 20px;
+   display: flex;
+   align-items: center;
+   justify-content: center;
+  }
+  
+  .notification-close:hover {
+   color: var(--text-primary);
+  }
+  
+  .btn-small {
+   background: transparent;
+   border: 1px solid var(--color-neon-teal);
+   color: var(--color-neon-teal);
+   padding: 0.25rem 0.5rem;
+   border-radius: 5px;
+   cursor: pointer;
+   font-size: 0.75rem;
+   margin: 0 0.25rem;
+   transition: all 0.3s ease;
+  }
+  
+  .btn-small:hover {
+   background: var(--color-neon-teal);
+   color: var(--bg-primary);
+  }
+  
+  .btn-danger {
+   border-color: #FF3B3B;
+   color: #FF3B3B;
+  }
+  
+  .btn-danger:hover {
+   background: #FF3B3B;
+   color: var(--bg-primary);
+  }
+  
+  .venture-actions {
+   display: flex;
+   gap: 0.5rem;
+   margin-left: auto;
+  }
+ </style>
+</body>
+</html>

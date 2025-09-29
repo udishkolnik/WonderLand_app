@@ -1,0 +1,493 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+ <meta charset="UTF-8">
+ <meta name="viewport" content="width=device-width, initial-scale=1.0">
+ <title>Sprint 0 - Sarah's Journey | SmartStart Demo</title>
+ <meta name="description" content="Follow Sarah as she completes Sprint 0, scoping her MVP and building her initial team of collaborators.">
+ <meta name="keywords" content="SmartStart demo, Sprint 0, MVP scoping, team building, user journey, AliceSolutionsGroup">
+ <meta name="author" content="Udi Shkolnik, AliceSolutionsGroup">
+ <meta name="robots" content="index, follow">
+ 
+ <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+ <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+ <link rel="stylesheet" href="../assets/css/global.css">
+ <link rel="stylesheet" href="../assets/css/styles.css">
+ <style>
+  .demo-container {
+   max-width: 1200px;
+   margin: 0 auto;
+   padding: 2rem;
+  }
+  
+  .demo-header {
+   text-align: center;
+   margin-bottom: 3rem;
+  }
+  
+  .demo-title {
+   font-size: 2.5rem;
+   font-weight: 700;
+   background: var(--gradient-neon);
+   -webkit-background-clip: text;
+   -webkit-text-fill-color: transparent;
+   background-clip: text;
+   margin-bottom: 1rem;
+  }
+  
+  .demo-subtitle {
+   font-size: 1.125rem;
+   color: var(--text-secondary);
+   margin-bottom: 2rem;
+  }
+  
+  .journey-progress {
+   display: flex;
+   justify-content: center;
+   align-items: center;
+   gap: 1rem;
+   margin-bottom: 3rem;
+   flex-wrap: wrap;
+  }
+  
+  .progress-step {
+   display: flex;
+   align-items: center;
+   gap: 0.5rem;
+   padding: 0.5rem 1rem;
+   border-radius: 25px;
+   font-size: 0.875rem;
+   transition: all 0.3s ease;
+  }
+  
+  .progress-step.active {
+   background: var(--gradient-neon);
+   color: var(--bg-primary);
+   font-weight: 600;
+  }
+  
+  .progress-step.completed {
+   background: rgba(0, 255, 0, 0.2);
+   color: var(--accent-green);
+   border: 1px solid var(--accent-green);
+  }
+  
+  .progress-step.pending {
+   background: rgba(255, 255, 255, 0.1);
+   color: var(--text-secondary);
+   border: 1px solid var(--glass-border);
+  }
+  
+  .demo-content {
+   display: grid;
+   grid-template-columns: 1fr 1fr;
+   gap: 3rem;
+   margin-bottom: 3rem;
+  }
+  
+  .demo-story {
+   background: var(--glass-bg);
+   border: 1px solid var(--glass-border);
+   border-radius: 20px;
+   padding: 2rem;
+   backdrop-filter: blur(20px);
+  }
+  
+  .story-title {
+   font-size: 1.5rem;
+   color: var(--accent-cyan);
+   margin-bottom: 1rem;
+   display: flex;
+   align-items: center;
+   gap: 0.5rem;
+  }
+  
+  .story-content {
+   color: var(--text-secondary);
+   line-height: 1.6;
+   margin-bottom: 1.5rem;
+  }
+  
+  .story-highlight {
+   background: rgba(255, 255, 0, 0.1);
+   border-left: 4px solid var(--accent-yellow);
+   padding: 1rem;
+   border-radius: 8px;
+   margin: 1rem 0;
+  }
+  
+  .team-section {
+   background: rgba(0, 255, 255, 0.1);
+   border: 1px solid var(--accent-cyan);
+   border-radius: 15px;
+   padding: 1.5rem;
+   margin: 1.5rem 0;
+  }
+  
+  .team-section h4 {
+   color: var(--accent-cyan);
+   margin-bottom: 1rem;
+   display: flex;
+   align-items: center;
+   gap: 0.5rem;
+  }
+  
+  .team-member {
+   display: flex;
+   align-items: center;
+   gap: 1rem;
+   margin-bottom: 1rem;
+   padding: 1rem;
+   background: rgba(255, 255, 255, 0.05);
+   border-radius: 10px;
+  }
+  
+  .team-avatar {
+   width: 50px;
+   height: 50px;
+   border-radius: 50%;
+   background: var(--gradient-neon);
+   display: flex;
+   align-items: center;
+   justify-content: center;
+   font-size: 1.5rem;
+  }
+  
+  .team-info h5 {
+   color: var(--accent-yellow);
+   margin-bottom: 0.25rem;
+  }
+  
+  .team-info p {
+   color: var(--text-secondary);
+   font-size: 0.875rem;
+  }
+  
+  .demo-screenshots {
+   background: var(--glass-bg);
+   border: 1px solid var(--glass-border);
+   border-radius: 20px;
+   padding: 2rem;
+   backdrop-filter: blur(20px);
+  }
+  
+  .screenshot-title {
+   font-size: 1.5rem;
+   color: var(--accent-purple);
+   margin-bottom: 1rem;
+   display: flex;
+   align-items: center;
+   gap: 0.5rem;
+  }
+  
+  .screenshot-container {
+   background: var(--bg-primary);
+   border: 1px solid var(--glass-border);
+   border-radius: 15px;
+   padding: 1.5rem;
+   margin-bottom: 1.5rem;
+   position: relative;
+   overflow: hidden;
+  }
+  
+  .screenshot-header {
+   display: flex;
+   align-items: center;
+   gap: 0.5rem;
+   margin-bottom: 1rem;
+   padding-bottom: 1rem;
+   border-bottom: 1px solid var(--glass-border);
+  }
+  
+  .screenshot-dots {
+   display: flex;
+   gap: 0.5rem;
+  }
+  
+  .screenshot-dot {
+   width: 12px;
+   height: 12px;
+   border-radius: 50%;
+   background: var(--text-secondary);
+  }
+  
+  .screenshot-dot.red { background: #ff5f57; }
+  .screenshot-dot.yellow { background: #ffbd2e; }
+  .screenshot-dot.green { background: #28ca42; }
+  
+  .screenshot-content {
+   color: var(--text-secondary);
+   line-height: 1.6;
+  }
+  
+  .screenshot-content h4 {
+   color: var(--accent-yellow);
+   margin-bottom: 0.5rem;
+  }
+  
+  .screenshot-content p {
+   margin-bottom: 1rem;
+  }
+  
+  .screenshot-content ul {
+   margin-left: 1.5rem;
+   margin-bottom: 1rem;
+  }
+  
+  .screenshot-content li {
+   margin-bottom: 0.5rem;
+  }
+  
+  .demo-actions {
+   display: flex;
+   justify-content: space-between;
+   align-items: center;
+   margin-top: 3rem;
+  }
+  
+  .demo-button {
+   display: inline-block;
+   padding: 1rem 2rem;
+   background: var(--gradient-neon);
+   color: var(--bg-primary);
+   text-decoration: none;
+   border-radius: 50px;
+   font-weight: 600;
+   font-size: 1.125rem;
+   transition: all 0.3s ease;
+   box-shadow: 0 10px 30px rgba(255, 255, 0, 0.3);
+  }
+  
+  .demo-button:hover {
+   transform: translateY(-3px);
+   box-shadow: 0 15px 40px rgba(255, 255, 0, 0.4);
+  }
+  
+  .demo-button.secondary {
+   background: transparent;
+   color: var(--accent-cyan);
+   border: 2px solid var(--accent-cyan);
+   box-shadow: none;
+  }
+  
+  .demo-button.secondary:hover {
+   background: var(--accent-cyan);
+   color: var(--bg-primary);
+  }
+  
+  @media (max-width: 768px) {
+   .demo-content {
+    grid-template-columns: 1fr;
+    gap: 2rem;
+   }
+   
+   .journey-progress {
+    flex-direction: column;
+    align-items: stretch;
+   }
+   
+   .demo-actions {
+    flex-direction: column;
+    gap: 1rem;
+   }
+  }
+ </style>
+</head>
+<body>
+    <div id="global-header"></div>
+
+ <!-- Hero Section -->
+ <section class="hero">
+  <div class="container">
+   <div class="hero-content">
+    <h1> Sprint 0</h1>
+    <p>Sarah completes Sprint 0, scoping her MVP and building her initial team of collaborators</p>
+    <a href="#demo" class="cta-button">View Demo </a>
+   </div>
+  </div>
+ </section>
+
+ <!-- Demo Content -->
+ <section class="section" id="demo">
+  <div class="container">
+   <div class="demo-container">
+    <div class="demo-header">
+     <h2 class="demo-title">Day 6-7: Sprint 0</h2>
+     <p class="demo-subtitle">Sarah scopes her MVP and builds her initial team</p>
+    </div>
+
+    <div class="journey-progress">
+     <div class="progress-step completed">
+      <span>✓</span>
+      <span>Discovery</span>
+     </div>
+     <div class="progress-step completed">
+      <span>✓</span>
+      <span>Problem Statement</span>
+     </div>
+     <div class="progress-step active">
+      <span>3</span>
+      <span>Sprint 0</span>
+     </div>
+     <div class="progress-step pending">
+      <span>4</span>
+      <span>MVP Build</span>
+     </div>
+     <div class="progress-step pending">
+      <span>5</span>
+      <span>Beta Test</span>
+     </div>
+     <div class="progress-step pending">
+      <span>6</span>
+      <span>Decision Gate</span>
+     </div>
+    </div>
+
+    <div class="demo-content">
+     <div class="demo-story">
+      <h3 class="story-title">
+       <i class="fas fa-rocket"></i>
+       Sarah's Sprint 0 Journey
+      </h3>
+      <div class="story-content">
+       <p>With her problem statement approved, Sarah moved into Sprint 0 - the critical phase where she would scope her MVP and build her initial team. This phase was designed to be completed in less than a week, forcing clarity and focus.</p>
+       
+       <p>Sarah used SmartStart's MVP scoping template to define her minimum viable product. She focused on the core features that would validate her hypothesis: project management basics, team mood tracking, and simple wellness check-ins.</p>
+       
+       <div class="story-highlight">
+        <strong>Key Insight:</strong> Sarah realized that her MVP didn't need to be feature-complete - it just needed to solve the core problem and validate the market need.
+       </div>
+       
+       <p>Building her team was the next crucial step. Sarah used SmartStart's team matching algorithm to find collaborators with complementary skills. She was looking for a developer, a designer, and a marketing specialist.</p>
+       
+       <div class="team-section">
+        <h4><i class="fas fa-users"></i> Sarah's Team</h4>
+        
+        <div class="team-member">
+         <div class="team-avatar">👩‍💼</div>
+         <div class="team-info">
+          <h5>Sarah Chen</h5>
+          <p>Product Manager & Founder</p>
+         </div>
+        </div>
+        
+        <div class="team-member">
+         <div class="team-avatar"></div>
+         <div class="team-info">
+          <h5>Marcus Rodriguez</h5>
+          <p>Full-Stack Developer</p>
+         </div>
+        </div>
+        
+        <div class="team-member">
+         <div class="team-avatar">👩‍🎨</div>
+         <div class="team-info">
+          <h5>Elena Kim</h5>
+          <p>UI/UX Designer</p>
+         </div>
+        </div>
+        
+        <div class="team-member">
+         <div class="team-avatar"></div>
+         <div class="team-info">
+          <h5>David Park</h5>
+          <p>Marketing Specialist</p>
+         </div>
+        </div>
+       </div>
+       
+       <p>With her team assembled, Sarah used SmartStart's legal templates to formalize their collaboration. Each team member signed a Contributor Agreement, clearly defining their roles, equity participation, and IP assignment.</p>
+       
+       <p>By the end of Sprint 0, Sarah had a clear MVP scope, a committed team, and all legal agreements in place. She was ready to begin the 30-day MVP build phase.</p>
+      </div>
+     </div>
+
+     <div class="demo-screenshots">
+      <h3 class="screenshot-title">
+       <i class="fas fa-desktop"></i>
+       Platform Screenshots
+      </h3>
+      
+      <div class="screenshot-container">
+       <div class="screenshot-header">
+        <div class="screenshot-dots">
+         <div class="screenshot-dot red"></div>
+         <div class="screenshot-dot yellow"></div>
+         <div class="screenshot-dot green"></div>
+        </div>
+        <span style="color: var(--text-secondary); font-size: 0.875rem;">SmartStart - MVP Scoping Tool</span>
+       </div>
+       <div class="screenshot-content">
+        <h4>MVP Definition</h4>
+        <p>Sarah uses the structured template to define:</p>
+        <ul>
+         <li>Core features and functionality</li>
+         <li>User stories and acceptance criteria</li>
+         <li>Technical requirements and architecture</li>
+         <li>Timeline and milestones</li>
+         <li>Success metrics and KPIs</li>
+        </ul>
+       </div>
+      </div>
+
+      <div class="screenshot-container">
+       <div class="screenshot-header">
+        <div class="screenshot-dots">
+         <div class="screenshot-dot red"></div>
+         <div class="screenshot-dot yellow"></div>
+         <div class="screenshot-dot green"></div>
+        </div>
+        <span style="color: var(--text-secondary); font-size: 0.875rem;">SmartStart - Team Matching</span>
+       </div>
+       <div class="screenshot-content">
+        <h4>Team Building</h4>
+        <p>Sarah finds and invites team members:</p>
+        <ul>
+         <li>Skill-based matching algorithm</li>
+         <li>Profile reviews and recommendations</li>
+         <li>Team composition analysis</li>
+         <li>Role definition and responsibilities</li>
+         <li>Invitation and acceptance workflow</li>
+        </ul>
+       </div>
+      </div>
+
+      <div class="screenshot-container">
+       <div class="screenshot-header">
+        <div class="screenshot-dots">
+         <div class="screenshot-dot red"></div>
+         <div class="screenshot-dot yellow"></div>
+         <div class="screenshot-dot green"></div>
+        </div>
+        <span style="color: var(--text-secondary); font-size: 0.875rem;">SmartStart - Legal Templates</span>
+       </div>
+       <div class="screenshot-content">
+        <h4>Legal Framework</h4>
+        <p>Sarah formalizes team agreements:</p>
+        <ul>
+         <li>Contributor Agreement templates</li>
+         <li>Equity distribution calculator</li>
+         <li>IP assignment and protection</li>
+         <li>E-signature integration</li>
+         <li>Document management system</li>
+        </ul>
+       </div>
+      </div>
+     </div>
+    </div>
+
+    <div class="demo-actions">
+     <a href="problem-statement.html" class="demo-button secondary">← Back: Problem Statement</a>
+     <a href="mvp-build.html" class="demo-button">Next: MVP Build →</a>
+    </div>
+   </div>
+  </div>
+ </section>
+
+ 
+ <div id="global-footer"></div>
+
+ <script src="../assets/js/global.js">
+ <script src="../assets/js/script.js"></script>
+</body>
+</html>

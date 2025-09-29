@@ -1,0 +1,96 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Test Legal Documents - SmartStart</title>
+    <link rel="stylesheet" href="assets/css/styles.css">
+    <link rel="stylesheet" href="assets/css/legal-documents.css">
+</head>
+<body>
+    <div class="container" style="padding: 2rem; text-align: center;">
+        <h1>Legal Documents System Test</h1>
+        <p>Testing the legal documents API and frontend integration</p>
+        
+        <div id="test-results" style="margin: 2rem 0; padding: 1rem; background: var(--bg-secondary); border-radius: 8px;">
+            <h3>Test Results</h3>
+            <div id="results-content">Running tests...</div>
+        </div>
+        
+        <button id="test-api-btn" class="cta-button primary" style="margin: 1rem;">
+            Test API Connection
+        </button>
+        
+        <button id="test-legal-modal-btn" class="cta-button secondary" style="margin: 1rem;">
+            Test Legal Documents Modal
+        </button>
+    </div>
+
+    <script src="assets/js/legal-documents.js"></script>
+    <script>
+        const resultsDiv = document.getElementById('results-content');
+        
+        function addResult(message, type = 'info') {
+            const div = document.createElement('div');
+            div.style.margin = '0.5rem 0';
+            div.style.padding = '0.5rem';
+            div.style.borderRadius = '4px';
+            div.style.backgroundColor = type === 'success' ? '#d4edda' : type === 'error' ? '#f8d7da' : '#d1ecf1';
+            div.style.color = type === 'success' ? '#155724' : type === 'error' ? '#721c24' : '#0c5460';
+            div.textContent = message;
+            resultsDiv.appendChild(div);
+        }
+        
+        // Test API connection
+        document.getElementById('test-api-btn').addEventListener('click', async () => {
+            resultsDiv.innerHTML = '';
+            addResult('Testing API connection...', 'info');
+            
+            try {
+                const response = await fetch('http://localhost:3345/api/v1/legal/documents');
+                const data = await response.json();
+                
+                if (data.success) {
+                    addResult(`✅ API Connection Successful! Found ${data.documents.length} documents`, 'success');
+                    data.documents.forEach(doc => {
+                        addResult(`📄 ${doc.name} (${doc.id})`, 'info');
+                    });
+                } else {
+                    addResult(`❌ API Error: ${data.message}`, 'error');
+                }
+            } catch (error) {
+                addResult(`❌ Connection Error: ${error.message}`, 'error');
+            }
+        });
+        
+        // Test legal documents modal
+        document.getElementById('test-legal-modal-btn').addEventListener('click', async () => {
+            resultsDiv.innerHTML = '';
+            addResult('Testing legal documents modal...', 'info');
+            
+            try {
+                if (window.LegalDocumentsSystem) {
+                    const legalSystem = new window.LegalDocumentsSystem();
+                    await legalSystem.initialize({
+                        id: 'test_user_123',
+                        name: 'Test User',
+                        email: 'test@example.com'
+                    });
+                    addResult('✅ Legal Documents Modal Opened Successfully!', 'success');
+                } else {
+                    addResult('❌ LegalDocumentsSystem not found', 'error');
+                }
+            } catch (error) {
+                addResult(`❌ Modal Error: ${error.message}`, 'error');
+            }
+        });
+        
+        // Auto-run API test on page load
+        window.addEventListener('load', () => {
+            setTimeout(() => {
+                document.getElementById('test-api-btn').click();
+            }, 1000);
+        });
+    </script>
+</body>
+</html>

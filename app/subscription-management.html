@@ -1,0 +1,253 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Subscription Management - SmartStart Platform | AliceSolutionsGroup</title>
+    <meta name="description" content="Manage your SmartStart Platform subscription, billing, and QuickBooks integration.">
+    <meta name="keywords" content="subscription, billing, QuickBooks, SmartStart, AliceSolutionsGroup">
+    <meta name="author" content="Udi Shkolnik, AliceSolutionsGroup">
+    <meta name="robots" content="index, follow">
+    
+    <!-- Favicon -->
+    <link rel="icon" type="image/svg+xml" href="favicon.svg">
+    <link rel="icon" type="image/x-icon" href="favicon.ico">
+    
+    <!-- CSS -->
+    <link rel="stylesheet" href="/assets/css/styles.css">
+    <link rel="stylesheet" href="/assets/css/legal-documents.css">
+    
+    <!-- Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+</head>
+<body>
+    <!-- App Header -->
+    <div id="app-header"></div>
+
+    <!-- Main Content -->
+    <main class="main-content">
+        <div class="container">
+            <!-- Header -->
+            <div class="page-header">
+                <h1 class="page-title">Subscription Management</h1>
+                <p class="page-subtitle">Manage your SmartStart Platform subscription and billing</p>
+            </div>
+
+            <!-- QuickBooks Status -->
+            <div class="status-card" id="quickbooks-status">
+                <div class="status-header">
+                    <h3>QuickBooks Integration</h3>
+                    <span class="status-badge" id="qb-status-badge">Checking...</span>
+                </div>
+                <div class="status-content">
+                    <p id="qb-status-text">Connecting to QuickBooks...</p>
+                    <button class="btn btn-primary" id="connect-qb-btn" style="display: none;">Connect to QuickBooks</button>
+                </div>
+            </div>
+
+            <!-- Current Subscription -->
+            <div class="subscription-card" id="current-subscription">
+                <div class="card-header">
+                    <h3>Current Subscription</h3>
+                    <span class="plan-badge" id="current-plan">Loading...</span>
+                </div>
+                <div class="card-content">
+                    <div class="subscription-details">
+                        <div class="detail-item">
+                            <span class="detail-label">Plan:</span>
+                            <span class="detail-value" id="plan-name">-</span>
+                        </div>
+                        <div class="detail-item">
+                            <span class="detail-label">Price:</span>
+                            <span class="detail-value" id="plan-price">-</span>
+                        </div>
+                        <div class="detail-item">
+                            <span class="detail-label">Status:</span>
+                            <span class="detail-value" id="plan-status">-</span>
+                        </div>
+                        <div class="detail-item">
+                            <span class="detail-label">Next Billing:</span>
+                            <span class="detail-value" id="next-billing">-</span>
+                        </div>
+                    </div>
+                    <div class="subscription-actions">
+                        <button class="btn btn-secondary" id="upgrade-btn">Upgrade Plan</button>
+                        <button class="btn btn-danger" id="cancel-btn">Cancel Subscription</button>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Available Plans -->
+            <div class="plans-section">
+                <h3>Available Plans</h3>
+                <div class="plans-grid">
+                    <div class="plan-card" data-plan="monthly">
+                        <div class="plan-header">
+                            <h4>Monthly</h4>
+                            <div class="plan-price">$29<span>/month</span></div>
+                        </div>
+                        <div class="plan-features">
+                            <ul>
+                                <li>✓ Full platform access</li>
+                                <li>✓ Legal document management</li>
+                                <li>✓ Team collaboration</li>
+                                <li>✓ QuickBooks integration</li>
+                            </ul>
+                        </div>
+                        <button class="btn btn-outline" data-action="select-plan" data-plan="monthly">Select Plan</button>
+                    </div>
+                    
+                    <div class="plan-card featured" data-plan="annual">
+                        <div class="plan-badge">Most Popular</div>
+                        <div class="plan-header">
+                            <h4>Annual</h4>
+                            <div class="plan-price">$299<span>/year</span></div>
+                            <div class="plan-savings">Save 14%</div>
+                        </div>
+                        <div class="plan-features">
+                            <ul>
+                                <li>✓ Everything in Monthly</li>
+                                <li>✓ Priority support</li>
+                                <li>✓ Advanced analytics</li>
+                                <li>✓ Custom integrations</li>
+                            </ul>
+                        </div>
+                        <button class="btn btn-primary" data-action="select-plan" data-plan="annual">Select Plan</button>
+                    </div>
+                    
+                    <div class="plan-card" data-plan="premium">
+                        <div class="plan-header">
+                            <h4>Premium</h4>
+                            <div class="plan-price">$99<span>/month</span></div>
+                        </div>
+                        <div class="plan-features">
+                            <ul>
+                                <li>✓ Everything in Annual</li>
+                                <li>✓ White-label options</li>
+                                <li>✓ API access</li>
+                                <li>✓ Dedicated support</li>
+                            </ul>
+                        </div>
+                        <button class="btn btn-outline" data-action="select-plan" data-plan="premium">Select Plan</button>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Billing History -->
+            <div class="billing-section">
+                <h3>Billing History</h3>
+                <div class="billing-table-container">
+                    <table class="billing-table" id="billing-table">
+                        <thead>
+                            <tr>
+                                <th>Date</th>
+                                <th>Description</th>
+                                <th>Amount</th>
+                                <th>Status</th>
+                                <th>Invoice</th>
+                            </tr>
+                        </thead>
+                        <tbody id="billing-tbody">
+                            <tr>
+                                <td colspan="5" class="loading-cell">Loading billing history...</td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+
+            <!-- Payment Methods -->
+            <div class="payment-section">
+                <h3>Payment Methods</h3>
+                <div class="payment-methods" id="payment-methods">
+                    <div class="payment-method">
+                        <div class="method-info">
+                            <span class="method-type">Credit Card</span>
+                            <span class="method-details">**** **** **** 1234</span>
+                        </div>
+                        <div class="method-actions">
+                            <button class="btn btn-sm btn-outline">Edit</button>
+                            <button class="btn btn-sm btn-danger">Remove</button>
+                        </div>
+                    </div>
+                </div>
+                <button class="btn btn-primary" id="add-payment-method">Add Payment Method</button>
+            </div>
+        </div>
+    </main>
+
+    <!-- Modals -->
+    <!-- Plan Selection Modal -->
+    <div class="modal" id="plan-modal">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h3 id="modal-title">Select Plan</h3>
+                <button class="modal-close" id="close-plan-modal">&times;</button>
+            </div>
+            <div class="modal-body">
+                <div class="plan-confirmation">
+                    <div class="selected-plan" id="selected-plan-info">
+                        <!-- Plan details will be populated here -->
+                    </div>
+                    <div class="billing-address">
+                        <h4>Billing Address</h4>
+                        <form id="billing-form">
+                            <div class="form-group">
+                                <label for="address-line1">Address Line 1</label>
+                                <input type="text" id="address-line1" name="line1" required>
+                            </div>
+                            <div class="form-group">
+                                <label for="address-line2">Address Line 2</label>
+                                <input type="text" id="address-line2" name="line2">
+                            </div>
+                            <div class="form-row">
+                                <div class="form-group">
+                                    <label for="address-city">City</label>
+                                    <input type="text" id="address-city" name="city" required>
+                                </div>
+                                <div class="form-group">
+                                    <label for="address-state">State</label>
+                                    <input type="text" id="address-state" name="state" required>
+                                </div>
+                                <div class="form-group">
+                                    <label for="address-zip">ZIP Code</label>
+                                    <input type="text" id="address-zip" name="zip" required>
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <label for="address-country">Country</label>
+                                <select id="address-country" name="country" required>
+                                    <option value="US">United States</option>
+                                    <option value="CA">Canada</option>
+                                    <option value="UK">United Kingdom</option>
+                                    <option value="AU">Australia</option>
+                                </select>
+                            </div>
+                        </form>
+                    </div>
+                </div>
+            </div>
+            <div class="modal-footer">
+                <button class="btn btn-secondary" id="cancel-plan">Cancel</button>
+                <button class="btn btn-primary" id="confirm-plan">Confirm & Subscribe</button>
+            </div>
+        </div>
+    </div>
+
+    <!-- Loading Overlay -->
+    <div class="loading-overlay" id="loading-overlay">
+        <div class="loading-spinner"></div>
+        <p>Processing your request...</p>
+    </div>
+
+    <!-- Notification Container -->
+    <div class="notification-container" id="notification-container"></div>
+
+    <!-- Scripts -->
+    <script src="/assets/js/components.js"></script>
+    <script src="/assets/js/header-loader.js"></script>
+    <script src="/assets/js/subscription-management.js"></script>
+</body>
+</html>

@@ -1,0 +1,139 @@
+<!-- SmartStart App Header -->
+<header class="header app-header glass">
+    <nav class="nav">
+        <a href="dashboard.html" class="logo">
+            <span class="logo-icon">🚀</span>
+            <span>SmartStart Platform</span>
+        </a>
+    <ul class="nav-links">
+        <li><a href="dashboard.html" class="nav-link active">Dashboard</a></li>
+        <li><a href="ventures.html" class="nav-link">Ventures</a></li>
+        <li><a href="venture-board.html" class="nav-link">Board</a></li>
+        <li><a href="team.html" class="nav-link">Team</a></li>
+        <li><a href="profile-settings.html" class="nav-link">Profile</a></li>
+    </ul>
+        <div class="header-actions">
+            <div class="user-menu">
+                <button class="btn btn-ghost user-dropdown" id="userDropdown">
+                    <div class="user-avatar-small">
+                        <span id="header-user-initial">U</span>
+                    </div>
+                    <div class="user-info-compact">
+                        <span id="header-user-name">User</span>
+                        <span id="header-user-email">user@example.com</span>
+                    </div>
+                    <i class="fas fa-chevron-down"></i>
+                </button>
+                <div class="dropdown-menu" id="userDropdownMenu">
+                    <div class="dropdown-header">
+                        <div class="user-info">
+                            <div class="user-avatar">
+                                <span id="dropdown-user-initial">U</span>
+                            </div>
+                            <div class="user-details">
+                                <div class="user-name" id="dropdown-user-name">User Name</div>
+                                <div class="user-email" id="dropdown-user-email">user@example.com</div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="dropdown-divider"></div>
+                    <a class="dropdown-item" href="profile-settings.html">
+                        <i class="fas fa-user"></i>
+                        Profile
+                    </a>
+                    <a class="dropdown-item" href="settings.html">
+                        <i class="fas fa-cog"></i>
+                        Settings
+                    </a>
+        <a class="dropdown-item" href="subscription-management.html">
+            <i class="fas fa-credit-card"></i>
+            Billing
+        </a>
+        <a class="dropdown-item" href="legal.html">
+            <i class="fas fa-file-contract"></i>
+            Legal
+        </a>
+                    <div class="dropdown-divider"></div>
+                    <a class="dropdown-item" href="#" id="header-logout-btn">
+                        <i class="fas fa-sign-out-alt"></i>
+                        Logout
+                    </a>
+                </div>
+            </div>
+        </div>
+    </nav>
+</header>
+
+<script>
+document.addEventListener('DOMContentLoaded', () => {
+    // User dropdown functionality
+    const userDropdown = document.getElementById('userDropdown');
+    const userDropdownMenu = document.getElementById('userDropdownMenu');
+    const headerUserEmail = document.getElementById('header-user-email');
+    const headerLogoutBtn = document.getElementById('header-logout-btn');
+
+    // Set user information
+    const user = JSON.parse(localStorage.getItem('smartstart_user') || '{}');
+    if (user && user.email) {
+        // Set user initial
+        const headerUserInitial = document.getElementById('header-user-initial');
+        const dropdownUserInitial = document.getElementById('dropdown-user-initial');
+        const userInitial = (user.firstName || user.first_name || '').charAt(0).toUpperCase() + 
+                           (user.lastName || user.last_name || '').charAt(0).toUpperCase();
+        
+        if (headerUserInitial) {
+            headerUserInitial.textContent = userInitial;
+        }
+        if (dropdownUserInitial) {
+            dropdownUserInitial.textContent = userInitial;
+        }
+        
+        // Set header user info
+        const headerUserName = document.getElementById('header-user-name');
+        const headerUserEmail = document.getElementById('header-user-email');
+        
+        if (headerUserName) {
+            headerUserName.textContent = `${user.firstName || user.first_name || ''} ${user.lastName || user.last_name || ''}`.trim() || 'User';
+        }
+        if (headerUserEmail) {
+            headerUserEmail.textContent = user.email;
+        }
+        
+        // Set dropdown user info
+        const dropdownUserName = document.getElementById('dropdown-user-name');
+        const dropdownUserEmail = document.getElementById('dropdown-user-email');
+        
+        if (dropdownUserName) {
+            dropdownUserName.textContent = `${user.firstName || user.first_name || ''} ${user.lastName || user.last_name || ''}`.trim() || 'User';
+        }
+        if (dropdownUserEmail) {
+            dropdownUserEmail.textContent = user.email;
+        }
+    }
+
+    // Toggle dropdown
+    if (userDropdown && userDropdownMenu) {
+        userDropdown.addEventListener('click', (e) => {
+            e.preventDefault();
+            userDropdownMenu.classList.toggle('show');
+        });
+
+        // Close dropdown when clicking outside
+        document.addEventListener('click', (e) => {
+            if (!userDropdown.contains(e.target) && !userDropdownMenu.contains(e.target)) {
+                userDropdownMenu.classList.remove('show');
+            }
+        });
+    }
+
+    // Logout functionality
+    if (headerLogoutBtn) {
+        headerLogoutBtn.addEventListener('click', (e) => {
+            e.preventDefault();
+            localStorage.removeItem('smartstart_token');
+            localStorage.removeItem('smartstart_user');
+                window.location.href = 'auth/login.html';
+        });
+    }
+});
+</script>

@@ -1,0 +1,408 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+ <meta charset="UTF-8">
+ <meta name="viewport" content="width=device-width, initial-scale=1.0">
+ <title>Discovery & Signup - Sarah's Journey | SmartStart Demo</title>
+ <meta name="description" content="Follow Sarah's first steps on SmartStart - discovering the platform, creating her account, and exploring the community features.">
+ <meta name="keywords" content="SmartStart demo, user journey, platform discovery, account creation, AliceSolutionsGroup">
+ <meta name="author" content="Udi Shkolnik, AliceSolutionsGroup">
+ <meta name="robots" content="index, follow">
+ 
+ <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+ <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+ <link rel="stylesheet" href="../assets/css/global.css">
+ <link rel="stylesheet" href="../assets/css/styles.css">
+ <style>
+  .demo-container {
+   max-width: 1200px;
+   margin: 0 auto;
+   padding: 2rem;
+  }
+  
+  .demo-header {
+   text-align: center;
+   margin-bottom: 3rem;
+  }
+  
+  .demo-title {
+   font-size: 2.5rem;
+   font-weight: 700;
+   background: var(--gradient-neon);
+   -webkit-background-clip: text;
+   -webkit-text-fill-color: transparent;
+   background-clip: text;
+   margin-bottom: 1rem;
+  }
+  
+  .demo-subtitle {
+   font-size: 1.125rem;
+   color: var(--text-secondary);
+   margin-bottom: 2rem;
+  }
+  
+  .journey-progress {
+   display: flex;
+   justify-content: center;
+   align-items: center;
+   gap: 1rem;
+   margin-bottom: 3rem;
+   flex-wrap: wrap;
+  }
+  
+  .progress-step {
+   display: flex;
+   align-items: center;
+   gap: 0.5rem;
+   padding: 0.5rem 1rem;
+   border-radius: 25px;
+   font-size: 0.875rem;
+   transition: all 0.3s ease;
+  }
+  
+  .progress-step.active {
+   background: var(--gradient-neon);
+   color: var(--bg-primary);
+   font-weight: 600;
+  }
+  
+  .progress-step.completed {
+   background: rgba(0, 255, 0, 0.2);
+   color: var(--accent-green);
+   border: 1px solid var(--accent-green);
+  }
+  
+  .progress-step.pending {
+   background: rgba(255, 255, 255, 0.1);
+   color: var(--text-secondary);
+   border: 1px solid var(--glass-border);
+  }
+  
+  .demo-content {
+   display: grid;
+   grid-template-columns: 1fr 1fr;
+   gap: 3rem;
+   margin-bottom: 3rem;
+  }
+  
+  .demo-story {
+   background: var(--glass-bg);
+   border: 1px solid var(--glass-border);
+   border-radius: 20px;
+   padding: 2rem;
+   backdrop-filter: blur(20px);
+  }
+  
+  .story-title {
+   font-size: 1.5rem;
+   color: var(--accent-cyan);
+   margin-bottom: 1rem;
+   display: flex;
+   align-items: center;
+   gap: 0.5rem;
+  }
+  
+  .story-content {
+   color: var(--text-secondary);
+   line-height: 1.6;
+   margin-bottom: 1.5rem;
+  }
+  
+  .story-highlight {
+   background: rgba(255, 255, 0, 0.1);
+   border-left: 4px solid var(--accent-yellow);
+   padding: 1rem;
+   border-radius: 8px;
+   margin: 1rem 0;
+  }
+  
+  .demo-screenshots {
+   background: var(--glass-bg);
+   border: 1px solid var(--glass-border);
+   border-radius: 20px;
+   padding: 2rem;
+   backdrop-filter: blur(20px);
+  }
+  
+  .screenshot-title {
+   font-size: 1.5rem;
+   color: var(--accent-purple);
+   margin-bottom: 1rem;
+   display: flex;
+   align-items: center;
+   gap: 0.5rem;
+  }
+  
+  .screenshot-container {
+   background: var(--bg-primary);
+   border: 1px solid var(--glass-border);
+   border-radius: 15px;
+   padding: 1.5rem;
+   margin-bottom: 1.5rem;
+   position: relative;
+   overflow: hidden;
+  }
+  
+  .screenshot-header {
+   display: flex;
+   align-items: center;
+   gap: 0.5rem;
+   margin-bottom: 1rem;
+   padding-bottom: 1rem;
+   border-bottom: 1px solid var(--glass-border);
+  }
+  
+  .screenshot-dots {
+   display: flex;
+   gap: 0.5rem;
+  }
+  
+  .screenshot-dot {
+   width: 12px;
+   height: 12px;
+   border-radius: 50%;
+   background: var(--text-secondary);
+  }
+  
+  .screenshot-dot.red { background: #ff5f57; }
+  .screenshot-dot.yellow { background: #ffbd2e; }
+  .screenshot-dot.green { background: #28ca42; }
+  
+  .screenshot-content {
+   color: var(--text-secondary);
+   line-height: 1.6;
+  }
+  
+  .screenshot-content h4 {
+   color: var(--accent-yellow);
+   margin-bottom: 0.5rem;
+  }
+  
+  .screenshot-content p {
+   margin-bottom: 1rem;
+  }
+  
+  .screenshot-content ul {
+   margin-left: 1.5rem;
+   margin-bottom: 1rem;
+  }
+  
+  .screenshot-content li {
+   margin-bottom: 0.5rem;
+  }
+  
+  .demo-actions {
+   display: flex;
+   justify-content: space-between;
+   align-items: center;
+   margin-top: 3rem;
+  }
+  
+  .demo-button {
+   display: inline-block;
+   padding: 1rem 2rem;
+   background: var(--gradient-neon);
+   color: var(--bg-primary);
+   text-decoration: none;
+   border-radius: 50px;
+   font-weight: 600;
+   font-size: 1.125rem;
+   transition: all 0.3s ease;
+   box-shadow: 0 10px 30px rgba(255, 255, 0, 0.3);
+  }
+  
+  .demo-button:hover {
+   transform: translateY(-3px);
+   box-shadow: 0 15px 40px rgba(255, 255, 0, 0.4);
+  }
+  
+  .demo-button.secondary {
+   background: transparent;
+   color: var(--accent-cyan);
+   border: 2px solid var(--accent-cyan);
+   box-shadow: none;
+  }
+  
+  .demo-button.secondary:hover {
+   background: var(--accent-cyan);
+   color: var(--bg-primary);
+  }
+  
+  @media (max-width: 768px) {
+   .demo-content {
+    grid-template-columns: 1fr;
+    gap: 2rem;
+   }
+   
+   .journey-progress {
+    flex-direction: column;
+    align-items: stretch;
+   }
+   
+   .demo-actions {
+    flex-direction: column;
+    gap: 1rem;
+   }
+  }
+ </style>
+</head>
+<body>
+    <div id="global-header"></div>
+
+ <!-- Hero Section -->
+ <section class="hero">
+  <div class="container">
+   <div class="hero-content">
+    <h1> Discovery & Signup</h1>
+    <p>Sarah's first steps on SmartStart - discovering the platform and creating her account</p>
+    <a href="#demo" class="cta-button">View Demo </a>
+   </div>
+  </div>
+ </section>
+
+ <!-- Demo Content -->
+ <section class="section" id="demo">
+  <div class="container">
+   <div class="demo-container">
+    <div class="demo-header">
+     <h2 class="demo-title">Day 1-2: Discovery & Signup</h2>
+     <p class="demo-subtitle">Sarah discovers SmartStart and takes her first steps into the platform</p>
+    </div>
+
+    <div class="journey-progress">
+     <div class="progress-step active">
+      <span>1</span>
+      <span>Discovery</span>
+     </div>
+     <div class="progress-step pending">
+      <span>2</span>
+      <span>Problem Statement</span>
+     </div>
+     <div class="progress-step pending">
+      <span>3</span>
+      <span>Sprint 0</span>
+     </div>
+     <div class="progress-step pending">
+      <span>4</span>
+      <span>MVP Build</span>
+     </div>
+     <div class="progress-step pending">
+      <span>5</span>
+      <span>Beta Test</span>
+     </div>
+     <div class="progress-step pending">
+      <span>6</span>
+      <span>Decision Gate</span>
+     </div>
+    </div>
+
+    <div class="demo-content">
+     <div class="demo-story">
+      <h3 class="story-title">
+       <i class="fas fa-book-open"></i>
+       Sarah's Story
+      </h3>
+      <div class="story-content">
+       <p>Sarah was scrolling through LinkedIn when she came across a post from Udi Shkolnik about SmartStart. The post described a micro-venture studio that helps people turn practical product ideas into profitable SaaS businesses.</p>
+       
+       <p>Intrigued, Sarah clicked through to the SmartStart website. She was immediately drawn to the clean, professional design and the clear value proposition. The idea of having structured support, legal templates, and a collaborative community resonated with her.</p>
+       
+       <div class="story-highlight">
+        <strong>Key Insight:</strong> Sarah realized that SmartStart wasn't just another incubator - it was a complete ecosystem designed to reduce the friction of venture creation.
+       </div>
+       
+       <p>After reading through the pricing page and understanding the CAD $100/month membership fee, Sarah decided to take the plunge. She was particularly excited about the equity participation model and the portfolio approach to risk management.</p>
+       
+       <p>Sarah created her account and was immediately impressed by the onboarding process. The platform guided her through setting up her profile, including her skills, experience, and areas of interest.</p>
+      </div>
+     </div>
+
+     <div class="demo-screenshots">
+      <h3 class="screenshot-title">
+       <i class="fas fa-desktop"></i>
+       Platform Screenshots
+      </h3>
+      
+      <div class="screenshot-container">
+       <div class="screenshot-header">
+        <div class="screenshot-dots">
+         <div class="screenshot-dot red"></div>
+         <div class="screenshot-dot yellow"></div>
+         <div class="screenshot-dot green"></div>
+        </div>
+        <span style="color: var(--text-secondary); font-size: 0.875rem;">SmartStart - Discovery Page</span>
+       </div>
+       <div class="screenshot-content">
+        <h4>Welcome to SmartStart</h4>
+        <p>Sarah lands on the homepage and sees:</p>
+        <ul>
+         <li>Clear value proposition: "Transform practical product ideas into profitable SaaS businesses"</li>
+         <li>Founder spotlight with Udi's personal story</li>
+         <li>30-day venture pipeline explanation</li>
+         <li>Transparent pricing: CAD $100/month</li>
+         <li>Success stories from other members</li>
+        </ul>
+       </div>
+      </div>
+
+      <div class="screenshot-container">
+       <div class="screenshot-header">
+        <div class="screenshot-dots">
+         <div class="screenshot-dot red"></div>
+         <div class="screenshot-dot yellow"></div>
+         <div class="screenshot-dot green"></div>
+        </div>
+        <span style="color: var(--text-secondary); font-size: 0.875rem;">SmartStart - Signup Process</span>
+       </div>
+       <div class="screenshot-content">
+        <h4>Account Creation</h4>
+        <p>Sarah completes the signup process:</p>
+        <ul>
+         <li>Email verification and profile setup</li>
+         <li>Skills and experience input</li>
+         <li>Areas of interest selection</li>
+         <li>Payment setup through Stripe</li>
+         <li>Welcome email with next steps</li>
+        </ul>
+       </div>
+      </div>
+
+      <div class="screenshot-container">
+       <div class="screenshot-header">
+        <div class="screenshot-dots">
+         <div class="screenshot-dot red"></div>
+         <div class="screenshot-dot yellow"></div>
+         <div class="screenshot-dot green"></div>
+        </div>
+        <span style="color: var(--text-secondary); font-size: 0.875rem;">SmartStart - Dashboard</span>
+       </div>
+       <div class="screenshot-content">
+        <h4>First Dashboard View</h4>
+        <p>Sarah sees her new dashboard with:</p>
+        <ul>
+         <li>Welcome message and onboarding checklist</li>
+         <li>Available ventures to join</li>
+         <li>Community activity feed</li>
+         <li>Quick access to create new venture</li>
+         <li>Billing status and subscription info</li>
+        </ul>
+       </div>
+      </div>
+     </div>
+    </div>
+
+    <div class="demo-actions">
+     <a href="../index.html" class="demo-button secondary">← Back to Overview</a>
+     <a href="problem-statement.html" class="demo-button">Next: Problem Statement →</a>
+    </div>
+   </div>
+  </div>
+ </section>
+
+ 
+ <div id="global-footer"></div>
+
+ <script src="../assets/js/global.js">
+ <script src="../assets/js/script.js"></script>
+</body>
+</html>

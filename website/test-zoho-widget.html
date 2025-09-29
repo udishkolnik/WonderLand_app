@@ -1,0 +1,76 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Zoho Widget Test - AliceSolutionsGroup</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background: #1a1a1a;
+            color: white;
+            padding: 20px;
+        }
+        .container {
+            max-width: 800px;
+            margin: 0 auto;
+        }
+        .widget-container {
+            background: white;
+            color: black;
+            padding: 20px;
+            border-radius: 10px;
+            margin: 20px 0;
+        }
+        .error-log {
+            background: #ff4444;
+            color: white;
+            padding: 10px;
+            border-radius: 5px;
+            margin: 10px 0;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>Zoho Widget Test Page</h1>
+        <p>This page tests the Zoho pricing widget in isolation.</p>
+        
+        <div class="widget-container">
+            <h2>Zoho Pricing Widget</h2>
+            <div id="error-log"></div>
+            
+            <!-- Zoho Pricing Widget -->
+            <div 
+              id="zf-widget-root-id-ug3q82ei8"
+              data-pricing-table="true"
+              data-digest="2-3d170f8fc1545db8329bd27deda45029722947fef23961104ce1440153078efa959185c9e63c82230e9efda12c5cb6005b8be98efd300c35d3b8f4de32becd67" 
+              data-product_url="https://billing.zohocloud.ca">
+            </div>
+        </div>
+        
+        <div class="widget-container">
+            <h2>Alternative Zoho Widget (if first fails)</h2>
+            <div 
+              id="zf-widget-root-id-test"
+              data-pricing-table="true"
+              data-digest="2-3d170f8fc1545db8329bd27deda45029722947fef23961104ce1440153078efa959185c9e63c82230e9efda12c5cb6005b8be98efd300c35d3b8f4de32becd67" 
+              data-product_url="https://billing.zohosecure.ca">
+            </div>
+        </div>
+    </div>
+
+    <script>
+        // Error handling for Zoho widget
+        window.addEventListener('error', function(e) {
+            console.error('Widget Error:', e);
+            document.getElementById('error-log').innerHTML += '<div class="error-log">Error: ' + e.message + '</div>';
+        });
+
+        // Log when Zoho script loads
+        console.log('Loading Zoho widget...');
+    </script>
+    
+    <script src="https://js.zohostatic.com/books/zfwidgets/assets/js/zf-widget.js"></script>
+</body>
+</html>

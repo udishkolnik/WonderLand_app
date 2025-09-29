@@ -1,0 +1,277 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Team - SmartStart Platform | AliceSolutionsGroup</title>
+    <meta name="description" content="Manage your team, collaborate with members, and track team performance.">
+    <meta name="keywords" content="team, collaboration, SmartStart, AliceSolutionsGroup, team management">
+    <meta name="author" content="Udi Shkolnik, AliceSolutionsGroup">
+    <meta name="robots" content="noindex, nofollow">
+
+    <link rel="stylesheet" href="assets/css/styles.css">
+    <link rel="icon" type="image/svg+xml" href="favicon.svg">
+    <link rel="icon" type="image/x-icon" href="favicon.ico">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+</head>
+<body>
+    <!-- App Header -->
+    <div id="app-header"></div>
+
+    <!-- Main Content -->
+    <main class="main-content">
+        <div class="container">
+            <!-- Header -->
+            <header class="page-header">
+                <h1>Team Management</h1>
+                <p>Collaborate with your team members and manage team performance.</p>
+            </header>
+
+            <!-- Advanced Team Analytics -->
+            <section class="team-analytics">
+                <div class="card glass">
+                <div class="analytics-grid">
+                    <div class="analytics-card team-members">
+                        <div class="analytics-icon">👥</div>
+                        <div class="analytics-content">
+                            <div class="analytics-value" id="teamMembers">5</div>
+                            <div class="analytics-label">Team Members</div>
+                            <div class="analytics-trend">+2 this month</div>
+                        </div>
+                    </div>
+                    <div class="analytics-card active-ventures">
+                        <div class="analytics-icon">🚀</div>
+                        <div class="analytics-content">
+                            <div class="analytics-value" id="activeVentures">3</div>
+                            <div class="analytics-label">Active Ventures</div>
+                            <div class="analytics-trend">1 in decision gate</div>
+                        </div>
+                    </div>
+                    <div class="analytics-card collaboration-score">
+                        <div class="analytics-icon">🤝</div>
+                        <div class="analytics-content">
+                            <div class="analytics-value" id="collaborationScore">95%</div>
+                            <div class="analytics-label">Collaboration Score</div>
+                            <div class="analytics-trend">Excellent teamwork</div>
+                        </div>
+                    </div>
+                    <div class="analytics-card equity-distribution">
+                        <div class="analytics-icon">📊</div>
+                        <div class="analytics-content">
+                            <div class="analytics-value" id="equityDistributed">$2.4M</div>
+                            <div class="analytics-label">Equity Distributed</div>
+                            <div class="analytics-trend">Across 3 ventures</div>
+                        </div>
+                    </div>
+                </div>
+                </div>
+            </section>
+
+            <!-- AI-Powered Team Insights -->
+            <section class="card ai-insights-card glass">
+                <div class="card-header">
+                    <h2><i class="fas fa-brain"></i> AI Team Insights</h2>
+                    <button class="btn btn-ghost btn-sm" id="refreshInsights">Refresh</button>
+                </div>
+                <div class="ai-insights-content">
+                    <div class="insight-item">
+                        <div class="insight-icon">💡</div>
+                        <div class="insight-content">
+                            <h4>Skill Gap Detected</h4>
+                            <p>Your team could benefit from a marketing specialist for the upcoming launch phase</p>
+                        </div>
+                    </div>
+                    <div class="insight-item">
+                        <div class="insight-icon">⚡</div>
+                        <div class="insight-content">
+                            <h4>High Performance Alert</h4>
+                            <p>John Smith's productivity has increased 25% this week - consider his workload</p>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <!-- Enhanced Team Members with Venture Analytics -->
+            <section class="card team-members-card glass">
+                <div class="card-header">
+                    <h2>Team Members</h2>
+                    <div class="header-actions">
+                        <button class="btn btn-secondary btn-sm" id="filterMembers">Filter</button>
+                        <button class="btn btn-primary" id="invite-member-btn">
+                            <i class="fas fa-plus"></i>
+                            Invite Member
+                        </button>
+                    </div>
+                </div>
+                <div class="team-members-grid">
+                    <div class="member-card enhanced">
+                        <div class="member-header">
+                            <div class="member-avatar">
+                                <span>JS</span>
+                                <div class="status-indicator online"></div>
+                            </div>
+                            <div class="member-info">
+                                <h3>John Smith</h3>
+                                <p>Lead Developer & Co-founder</p>
+                                <div class="member-badges">
+                                    <span class="badge primary">Technical Lead</span>
+                                    <span class="badge success">High Performer</span>
+                                </div>
+                            </div>
+                            <div class="member-metrics">
+                                <div class="metric">
+                                    <span class="metric-label">Equity</span>
+                                    <span class="metric-value">15%</span>
+                                </div>
+                                <div class="metric">
+                                    <span class="metric-label">Ventures</span>
+                                    <span class="metric-value">3</span>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="member-performance">
+                            <div class="performance-bar">
+                                <div class="performance-fill" style="width: 95%"></div>
+                            </div>
+                            <span class="performance-text">95% productivity this week</span>
+                        </div>
+                        <div class="member-actions">
+                            <button class="btn btn-sm btn-primary">Message</button>
+                            <button class="btn btn-sm btn-secondary">Analytics</button>
+                            <button class="btn btn-sm btn-ghost">Equity</button>
+                        </div>
+                    </div>
+
+                    <div class="member-card enhanced">
+                        <div class="member-header">
+                            <div class="member-avatar">
+                                <span>AJ</span>
+                                <div class="status-indicator away"></div>
+                            </div>
+                            <div class="member-info">
+                                <h3>Alice Johnson</h3>
+                                <p>Product Manager & Co-founder</p>
+                                <div class="member-badges">
+                                    <span class="badge primary">Product Lead</span>
+                                    <span class="badge warning">Decision Gate</span>
+                                </div>
+                            </div>
+                            <div class="member-metrics">
+                                <div class="metric">
+                                    <span class="metric-label">Equity</span>
+                                    <span class="metric-value">12%</span>
+                                </div>
+                                <div class="metric">
+                                    <span class="metric-label">Ventures</span>
+                                    <span class="metric-value">2</span>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="member-performance">
+                            <div class="performance-bar">
+                                <div class="performance-fill" style="width: 78%"></div>
+                            </div>
+                            <span class="performance-text">78% productivity this week</span>
+                        </div>
+                        <div class="member-actions">
+                            <button class="btn btn-sm btn-primary">Message</button>
+                            <button class="btn btn-sm btn-secondary">Analytics</button>
+                            <button class="btn btn-sm btn-ghost">Equity</button>
+                        </div>
+                    </div>
+
+                    <div class="member-card enhanced">
+                        <div class="member-header">
+                            <div class="member-avatar">
+                                <span>MD</span>
+                                <div class="status-indicator online"></div>
+                            </div>
+                            <div class="member-info">
+                                <h3>Mike Davis</h3>
+                                <p>UX/UI Designer</p>
+                                <div class="member-badges">
+                                    <span class="badge secondary">Design Lead</span>
+                                    <span class="badge info">Contributor</span>
+                                </div>
+                            </div>
+                            <div class="member-metrics">
+                                <div class="metric">
+                                    <span class="metric-label">Equity</span>
+                                    <span class="metric-value">8%</span>
+                                </div>
+                                <div class="metric">
+                                    <span class="metric-label">Ventures</span>
+                                    <span class="metric-value">1</span>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="member-performance">
+                            <div class="performance-bar">
+                                <div class="performance-fill" style="width: 88%"></div>
+                            </div>
+                            <span class="performance-text">88% productivity this week</span>
+                        </div>
+                        <div class="member-actions">
+                            <button class="btn btn-sm btn-primary">Message</button>
+                            <button class="btn btn-sm btn-secondary">Analytics</button>
+                            <button class="btn btn-sm btn-ghost">Equity</button>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <!-- Recent Activity -->
+            <section class="card glass-effect mb-4">
+                <h2>Recent Team Activity</h2>
+                <div class="activity-feed">
+                    <div class="activity-item">
+                        <div class="activity-avatar">
+                            <span>JS</span>
+                        </div>
+                        <div class="activity-content">
+                            <p><strong>John Smith</strong> completed the API integration</p>
+                            <span class="activity-time">2 hours ago</span>
+                        </div>
+                    </div>
+                    <div class="activity-item">
+                        <div class="activity-avatar">
+                            <span>AS</span>
+                        </div>
+                        <div class="activity-content">
+                            <p><strong>Alice Johnson</strong> updated the project roadmap</p>
+                            <span class="activity-time">4 hours ago</span>
+                        </div>
+                    </div>
+                    <div class="activity-item">
+                        <div class="activity-avatar">
+                            <span>MD</span>
+                        </div>
+                        <div class="activity-content">
+                            <p><strong>Mike Davis</strong> shared new design mockups</p>
+                            <span class="activity-time">6 hours ago</span>
+                        </div>
+                    </div>
+                </div>
+            </section>
+        </div>
+    </main>
+
+    <!-- Footer -->
+    <footer class="footer">
+        <div class="container">
+            <p>&copy; 2025 AliceSolutionsGroup. All rights reserved. | SmartStart by Udi Shkolnik</p>
+        </div>
+    </footer>
+
+    <!-- Notification Container -->
+    <div class="notification-container" id="notification-container"></div>
+
+    <!-- Scripts -->
+    <script src="assets/js/components.js"></script>
+    <script src="assets/js/header-loader.js"></script>
+    <script src="assets/js/team.js"></script>
+</body>
+</html>

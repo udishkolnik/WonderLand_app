@@ -1,0 +1,133 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Ventures - SmartStart Platform | AliceSolutionsGroup</title>
+    <meta name="description" content="Manage your ventures, track progress, and collaborate with your team on SmartStart Platform.">
+    <meta name="keywords" content="ventures, SmartStart, AliceSolutionsGroup, venture management, collaboration">
+    <meta name="author" content="Udi Shkolnik, AliceSolutionsGroup">
+    <meta name="robots" content="noindex, nofollow">
+
+    <link rel="stylesheet" href="assets/css/styles.css">
+        <link rel="icon" type="image/svg+xml" href="favicon.svg">
+        <link rel="icon" type="image/x-icon" href="favicon.ico">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+</head>
+<body>
+    <!-- App Header -->
+    <div id="app-header"></div>
+
+    <!-- Main Content -->
+    <main class="main-content">
+        <div class="container">
+            <!-- Header -->
+            <header class="page-header">
+                <h1>Ventures</h1>
+                <p>Manage your ventures, track progress, and collaborate with your team.</p>
+            </header>
+
+            <!-- Venture Analytics -->
+            <section class="venture-analytics">
+                <div class="card glass">
+                <div class="analytics-grid">
+                    <div class="analytics-card total-ventures">
+                        <div class="analytics-icon">🚀</div>
+                        <div class="analytics-content">
+                            <div class="analytics-value" id="totalVentures">3</div>
+                            <div class="analytics-label">Total Ventures</div>
+                            <div class="analytics-trend">+1 this month</div>
+                        </div>
+                    </div>
+                    <div class="analytics-card active-ventures">
+                        <div class="analytics-icon">⚡</div>
+                        <div class="analytics-content">
+                            <div class="analytics-value" id="activeVentures">2</div>
+                            <div class="analytics-label">Active Ventures</div>
+                            <div class="analytics-trend">1 in decision gate</div>
+                        </div>
+                    </div>
+                    <div class="analytics-card completed-ventures">
+                        <div class="analytics-icon">✅</div>
+                        <div class="analytics-content">
+                            <div class="analytics-value" id="completedVentures">1</div>
+                            <div class="analytics-label">Completed</div>
+                            <div class="analytics-trend">33% success rate</div>
+                        </div>
+                    </div>
+                    <div class="analytics-card total-value">
+                        <div class="analytics-icon">💰</div>
+                        <div class="analytics-content">
+                            <div class="analytics-value" id="totalValue">$2.4M</div>
+                            <div class="analytics-label">Portfolio Value</div>
+                            <div class="analytics-trend">+15% growth</div>
+                        </div>
+                    </div>
+                </div>
+                </div>
+            </section>
+
+            <!-- AI Venture Insights -->
+            <section class="card ai-venture-insights glass">
+                <div class="card-header">
+                    <h2><i class="fas fa-brain"></i> AI Venture Insights</h2>
+                    <button class="btn btn-ghost btn-sm" id="refreshVentureInsights">Refresh</button>
+                </div>
+                <div class="ai-insights-content">
+                    <div class="insight-item">
+                        <div class="insight-icon">🎯</div>
+                        <div class="insight-content">
+                            <h4>Market Opportunity</h4>
+                            <p>Your fintech venture shows strong market potential. Consider expanding to adjacent markets.</p>
+                        </div>
+                    </div>
+                    <div class="insight-item">
+                        <div class="insight-icon">⚠️</div>
+                        <div class="insight-content">
+                            <h4>Decision Gate Alert</h4>
+                            <p>SmartStart Platform venture is approaching its 30-day decision gate. Prepare your metrics.</p>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <!-- Ventures List -->
+            <section class="card ventures-list-card glass">
+                <div class="card-header">
+                    <h2>Your Ventures</h2>
+                    <div class="header-actions">
+                        <button class="btn btn-secondary btn-sm" id="filterVentures">Filter</button>
+                        <button class="btn btn-primary" id="createVenture">
+                            <i class="fas fa-plus"></i>
+                            New Venture
+                        </button>
+                    </div>
+                </div>
+                <div class="ventures-grid" id="venturesGrid">
+                    <!-- Ventures will be loaded here -->
+                </div>
+            </section>
+        </div>
+    </main>
+
+    <!-- Footer -->
+    <footer class="footer">
+        <div class="container">
+            <p>&copy; 2025 AliceSolutionsGroup. All rights reserved. | SmartStart by Udi Shkolnik</p>
+        </div>
+    </footer>
+
+    <!-- Notification Container -->
+    <div class="notification-container" id="notification-container"></div>
+
+    <!-- Scripts -->
+    <script src="assets/js/error-handler.js"></script>
+    <script src="assets/js/components.js"></script>
+    <script src="assets/js/header-loader.js"></script>
+    <script src="assets/js/microinteractions.js"></script>
+    <script src="assets/js/ventures.js"></script>
+</body>
+</html>

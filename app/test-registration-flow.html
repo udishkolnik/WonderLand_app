@@ -1,0 +1,212 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Test Registration Flow - SmartStart</title>
+    <link rel="stylesheet" href="assets/css/styles.css">
+    <link rel="stylesheet" href="assets/css/legal-documents.css">
+</head>
+<body>
+    <div class="container" style="padding: 2rem; text-align: center;">
+        <h1>🧪 Registration Flow Test</h1>
+        <p>Testing the complete registration flow with legal documents system</p>
+        
+        <div id="test-results" style="margin: 2rem 0; padding: 1rem; background: var(--bg-secondary); border-radius: 8px; text-align: left;">
+            <h3>Test Results</h3>
+            <div id="results-content">Starting tests...</div>
+        </div>
+        
+        <button id="test-step1-btn" class="cta-button primary" style="margin: 0.5rem;">
+            Test Step 1: Account Creation
+        </button>
+        
+        <button id="test-step2-btn" class="cta-button primary" style="margin: 0.5rem;">
+            Test Step 2: Subscription Selection
+        </button>
+        
+        <button id="test-step3-btn" class="cta-button primary" style="margin: 0.5rem;">
+            Test Step 3: Legal Documents
+        </button>
+        
+        <button id="test-legal-system-btn" class="cta-button secondary" style="margin: 0.5rem;">
+            Test Legal Documents System
+        </button>
+        
+        <button id="test-complete-flow-btn" class="cta-button primary" style="margin: 0.5rem;">
+            Test Complete Flow
+        </button>
+    </div>
+
+    <script src="assets/js/legal-documents.js"></script>
+    <script>
+        const resultsDiv = document.getElementById('results-content');
+        
+        function addResult(message, type = 'info') {
+            const div = document.createElement('div');
+            div.style.margin = '0.5rem 0';
+            div.style.padding = '0.5rem';
+            div.style.borderRadius = '4px';
+            div.style.backgroundColor = type === 'success' ? '#d4edda' : type === 'error' ? '#f8d7da' : '#d1ecf1';
+            div.style.color = type === 'success' ? '#155724' : type === 'error' ? '#721c24' : '#0c5460';
+            div.textContent = `[${new Date().toLocaleTimeString()}] ${message}`;
+            resultsDiv.appendChild(div);
+            resultsDiv.scrollTop = resultsDiv.scrollHeight;
+        }
+        
+        // Test Step 1: Account Creation
+        document.getElementById('test-step1-btn').addEventListener('click', async () => {
+            addResult('Testing Step 1: Account Creation...', 'info');
+            
+            try {
+                // Simulate account creation
+                const mockUser = {
+                    id: 'test_user_' + Date.now(),
+                    email: 'test@example.com',
+                    firstName: 'Test',
+                    lastName: 'User',
+                    role: 'user',
+                    createdAt: new Date().toISOString()
+                };
+                
+                addResult(`✅ Account created: ${mockUser.email}`, 'success');
+                addResult(`User ID: ${mockUser.id}`, 'info');
+                
+            } catch (error) {
+                addResult(`❌ Account creation failed: ${error.message}`, 'error');
+            }
+        });
+        
+        // Test Step 2: Subscription Selection
+        document.getElementById('test-step2-btn').addEventListener('click', async () => {
+            addResult('Testing Step 2: Subscription Selection...', 'info');
+            
+            try {
+                const mockSubscription = {
+                    planName: 'monthly',
+                    planPrice: 29.99,
+                    billingCycle: 'monthly',
+                    status: 'active'
+                };
+                
+                addResult(`✅ Subscription selected: ${mockSubscription.planName} - $${mockSubscription.planPrice}`, 'success');
+                
+            } catch (error) {
+                addResult(`❌ Subscription selection failed: ${error.message}`, 'error');
+            }
+        });
+        
+        // Test Step 3: Legal Documents
+        document.getElementById('test-step3-btn').addEventListener('click', async () => {
+            addResult('Testing Step 3: Legal Documents...', 'info');
+            
+            try {
+                const documents = ['terms', 'privacy', 'nda', 'contributor'];
+                documents.forEach(docType => {
+                    addResult(`📄 ${docType}: Ready for Review`, 'info');
+                });
+                
+                addResult('✅ Legal documents step ready', 'success');
+                
+            } catch (error) {
+                addResult(`❌ Legal documents step failed: ${error.message}`, 'error');
+            }
+        });
+        
+        // Test Legal Documents System
+        document.getElementById('test-legal-system-btn').addEventListener('click', async () => {
+            addResult('Testing Legal Documents System...', 'info');
+            
+            try {
+                if (window.LegalDocumentsSystem) {
+                    addResult('✅ LegalDocumentsSystem class available', 'success');
+                    
+                    const legalDocsSystem = new window.LegalDocumentsSystem();
+                    addResult('✅ LegalDocumentsSystem instance created', 'success');
+                    
+                    // Set up callback
+                    window.onLegalDocumentsAccepted = function() {
+                        addResult('✅ Legal documents accepted callback triggered', 'success');
+                    };
+                    
+                    // Initialize with test data
+                    await legalDocsSystem.initialize({
+                        id: 'test_user_123',
+                        name: 'Test User',
+                        email: 'test@example.com',
+                        firstName: 'Test',
+                        lastName: 'User'
+                    });
+                    
+                    addResult('✅ Legal documents system initialized successfully', 'success');
+                    
+                } else {
+                    addResult('❌ LegalDocumentsSystem class not available', 'error');
+                }
+                
+            } catch (error) {
+                addResult(`❌ Legal documents system failed: ${error.message}`, 'error');
+                console.error('Legal documents system error:', error);
+            }
+        });
+        
+        // Test Complete Flow
+        document.getElementById('test-complete-flow-btn').addEventListener('click', async () => {
+            addResult('Testing Complete Registration Flow...', 'info');
+            
+            try {
+                // Step 1: Account Creation
+                addResult('Step 1: Creating account...', 'info');
+                const mockUser = {
+                    id: 'test_user_' + Date.now(),
+                    email: 'test@example.com',
+                    firstName: 'Test',
+                    lastName: 'User',
+                    role: 'user'
+                };
+                addResult('✅ Account created', 'success');
+                
+                // Step 2: Subscription
+                addResult('Step 2: Selecting subscription...', 'info');
+                const mockSubscription = {
+                    planName: 'monthly',
+                    planPrice: 29.99,
+                    billingCycle: 'monthly'
+                };
+                addResult('✅ Subscription selected', 'success');
+                
+                // Step 3: Legal Documents
+                addResult('Step 3: Processing legal documents...', 'info');
+                if (window.LegalDocumentsSystem) {
+                    const legalDocsSystem = new window.LegalDocumentsSystem();
+                    
+                    window.onLegalDocumentsAccepted = function() {
+                        addResult('✅ All legal documents signed', 'success');
+                        addResult('🎉 Registration flow completed successfully!', 'success');
+                    };
+                    
+                    await legalDocsSystem.initialize({
+                        id: mockUser.id,
+                        name: `${mockUser.firstName} ${mockUser.lastName}`,
+                        email: mockUser.email,
+                        firstName: mockUser.firstName,
+                        lastName: mockUser.lastName
+                    });
+                    
+                    addResult('✅ Legal documents system opened', 'success');
+                } else {
+                    addResult('❌ Legal documents system not available', 'error');
+                }
+                
+            } catch (error) {
+                addResult(`❌ Complete flow failed: ${error.message}`, 'error');
+                console.error('Complete flow error:', error);
+            }
+        });
+        
+        // Initialize
+        addResult('🧪 Registration Flow Test Suite Ready', 'info');
+        addResult('Click buttons above to test individual components', 'info');
+    </script>
+</body>
+</html>

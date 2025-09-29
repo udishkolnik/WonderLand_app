@@ -1,0 +1,1270 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Join SmartStart - Registration Flow | AliceSolutionsGroup</title>
+    <meta name="description" content="Complete your SmartStart registration - create account, choose subscription, sign legal documents, and start your venture journey.">
+    <meta name="keywords" content="register, SmartStart, subscription, legal documents, signature, venture platform">
+    <meta name="author" content="Udi Shkolnik, AliceSolutionsGroup">
+    <meta name="robots" content="index, follow">
+    
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link rel="stylesheet" href="../assets/css/styles.css">
+    <link rel="stylesheet" href="../assets/css/legal-documents.css">
+    <link rel="icon" type="image/svg+xml" href="../favicon.svg">
+    <link rel="icon" type="image/x-icon" href="../favicon.ico">
+    
+    <!-- Content Security Policy -->
+    <meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'self' 'unsafe-inline' https://cdnjs.cloudflare.com; style-src 'self' 'unsafe-inline' https://fonts.googleapis.com https://cdnjs.cloudflare.com; font-src 'self' https://fonts.gstatic.com https://cdnjs.cloudflare.com; img-src 'self' data:; connect-src 'self' http://localhost:3344 http://localhost:3345 https://sql.js.org; frame-src 'none';">
+    
+    <style>
+        .registration-flow-container {
+            min-height: 100vh;
+            background: var(--bg-primary);
+            padding: 2rem 0;
+        }
+        
+        .flow-header {
+            text-align: center;
+            margin-bottom: 3rem;
+        }
+        
+        .flow-title {
+            font-size: 2.5rem;
+            font-weight: 700;
+            background: var(--gradient-multi);
+            background-size: 400% 400%;
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+            animation: gradientShift 8s ease infinite;
+            margin-bottom: 1rem;
+        }
+        
+        .flow-subtitle {
+            color: var(--text-secondary);
+            font-size: 1.125rem;
+            margin-bottom: 2rem;
+        }
+        
+        .progress-indicator {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            gap: 1rem;
+            margin-bottom: 3rem;
+        }
+        
+        .progress-step {
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+            padding: 0.75rem 1.5rem;
+            border-radius: 25px;
+            background: rgba(255, 255, 255, 0.05);
+            border: 1px solid var(--glass-border);
+            transition: all 0.3s ease;
+        }
+        
+        .progress-step.active {
+            background: var(--gradient-multi);
+            border-color: var(--color-neon-teal);
+            box-shadow: var(--shadow-neon-teal);
+        }
+        
+        .progress-step.completed {
+            background: rgba(34, 197, 94, 0.1);
+            border-color: #22c55e;
+            color: #22c55e;
+        }
+        
+        .progress-step-number {
+            width: 24px;
+            height: 24px;
+            border-radius: 50%;
+            background: var(--bg-primary);
+            color: var(--text-primary);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 0.875rem;
+            font-weight: 600;
+        }
+        
+        .progress-step.active .progress-step-number {
+            background: var(--color-neon-teal);
+            color: var(--bg-primary);
+        }
+        
+        .progress-step.completed .progress-step-number {
+            background: #22c55e;
+            color: white;
+        }
+        
+        .progress-step-text {
+            font-size: 0.875rem;
+            font-weight: 500;
+        }
+        
+        .step-content {
+            background: var(--glass-bg);
+            border: 1px solid var(--glass-border);
+            border-radius: 20px;
+            padding: 3rem;
+            backdrop-filter: blur(20px);
+            box-shadow: var(--shadow-md);
+            max-width: 600px;
+            margin: 0 auto;
+            transition: all 0.3s ease;
+        }
+        
+        .step-content:hover {
+            box-shadow: var(--shadow-neon-teal);
+            border-color: var(--color-neon-teal);
+        }
+        
+        .step-title {
+            font-size: 1.75rem;
+            font-weight: 600;
+            color: var(--text-primary);
+            margin-bottom: 0.5rem;
+            text-align: center;
+        }
+        
+        .step-description {
+            color: var(--text-secondary);
+            text-align: center;
+            margin-bottom: 2rem;
+        }
+        
+        .form-group {
+            margin-bottom: 1.5rem;
+        }
+        
+        .form-label {
+            display: block;
+            color: var(--text-primary);
+            font-weight: 500;
+            margin-bottom: 0.5rem;
+        }
+        
+        .form-input {
+            width: 100%;
+            padding: 1rem;
+            border: 1px solid var(--glass-border);
+            border-radius: 10px;
+            background: rgba(255, 255, 255, 0.05);
+            color: var(--text-primary);
+            font-size: 1rem;
+            transition: all 0.3s ease;
+        }
+        
+        .form-input:focus {
+            outline: none;
+            border-color: var(--color-neon-teal);
+            box-shadow: 0 0 0 3px rgba(0, 229, 212, 0.1);
+        }
+        
+        .form-row {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 1rem;
+        }
+        
+        .subscription-plans {
+            display: grid;
+            gap: 1rem;
+            margin-bottom: 2rem;
+        }
+        
+        .subscription-plan {
+            border: 2px solid var(--glass-border);
+            border-radius: 15px;
+            padding: 1.5rem;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            position: relative;
+        }
+        
+        .subscription-plan:hover {
+            border-color: var(--color-neon-teal);
+            box-shadow: var(--shadow-neon-teal);
+        }
+        
+        .subscription-plan.selected {
+            border-color: var(--color-neon-teal);
+            background: rgba(0, 229, 212, 0.05);
+            box-shadow: var(--shadow-neon-teal);
+        }
+        
+        .subscription-plan.selected::before {
+            content: '✓';
+            position: absolute;
+            top: 1rem;
+            right: 1rem;
+            width: 24px;
+            height: 24px;
+            background: var(--color-neon-teal);
+            color: var(--bg-primary);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-weight: bold;
+        }
+        
+        .plan-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 1rem;
+        }
+        
+        .plan-title {
+            font-size: 1.25rem;
+            font-weight: 600;
+            color: var(--text-primary);
+        }
+        
+        .plan-price {
+            font-size: 1.5rem;
+            font-weight: 700;
+            color: var(--color-neon-teal);
+        }
+        
+        .plan-features {
+            list-style: none;
+            padding: 0;
+            margin: 0;
+        }
+        
+        .plan-features li {
+            padding: 0.5rem 0;
+            color: var(--text-secondary);
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+        }
+        
+        .plan-features li::before {
+            content: '✓';
+            color: var(--color-neon-green);
+            font-weight: bold;
+        }
+        
+        .step-actions {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-top: 2rem;
+        }
+        
+        .btn {
+            padding: 1rem 2rem;
+            border: none;
+            border-radius: 10px;
+            font-size: 1rem;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            text-decoration: none;
+            display: inline-flex;
+            align-items: center;
+            gap: 0.5rem;
+        }
+        
+        .btn-primary {
+            background: var(--gradient-multi);
+            color: var(--bg-primary);
+            box-shadow: var(--shadow-neon-teal);
+        }
+        
+        .btn-primary:hover {
+            transform: translateY(-2px);
+            box-shadow: var(--shadow-neon-teal);
+        }
+        
+        .btn-secondary {
+            background: rgba(255, 255, 255, 0.1);
+            color: var(--text-primary);
+            border: 1px solid var(--glass-border);
+        }
+        
+        .btn-secondary:hover {
+            background: rgba(255, 255, 255, 0.15);
+            border-color: var(--color-neon-teal);
+        }
+        
+        .btn:disabled {
+            opacity: 0.5;
+            cursor: not-allowed;
+            transform: none;
+        }
+        
+        .legal-documents-preview {
+            background: rgba(255, 255, 255, 0.05);
+            border-radius: 10px;
+            padding: 1.5rem;
+            margin-bottom: 2rem;
+        }
+        
+        .document-item {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 1rem;
+            border: 1px solid var(--glass-border);
+            border-radius: 8px;
+            margin-bottom: 1rem;
+            transition: all 0.3s ease;
+        }
+        
+        .document-item:hover {
+            border-color: var(--color-neon-teal);
+        }
+        
+        .document-info {
+            display: flex;
+            align-items: center;
+            gap: 1rem;
+        }
+        
+        .document-icon {
+            width: 40px;
+            height: 40px;
+            background: var(--gradient-multi);
+            border-radius: 8px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: var(--bg-primary);
+            font-size: 1.2rem;
+        }
+        
+        .document-details h4 {
+            margin: 0 0 0.25rem 0;
+            color: var(--text-primary);
+            font-size: 1rem;
+        }
+        
+        .document-details p {
+            margin: 0;
+            color: var(--text-secondary);
+            font-size: 0.875rem;
+        }
+        
+        .document-status {
+            padding: 0.5rem 1rem;
+            border-radius: 20px;
+            font-size: 0.875rem;
+            font-weight: 500;
+        }
+        
+        .status-pending {
+            background: rgba(255, 193, 7, 0.1);
+            color: #ffc107;
+            border: 1px solid rgba(255, 193, 7, 0.3);
+        }
+        
+        .status-signed {
+            background: rgba(34, 197, 94, 0.1);
+            color: #22c55e;
+            border: 1px solid rgba(34, 197, 94, 0.3);
+        }
+        
+        .signature-pad {
+            border: 2px dashed var(--glass-border);
+            border-radius: 10px;
+            padding: 2rem;
+            text-align: center;
+            margin: 1rem 0;
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+        
+        .signature-pad:hover {
+            border-color: var(--color-neon-teal);
+            background: rgba(0, 229, 212, 0.05);
+        }
+        
+        .signature-pad.has-signature {
+            border-style: solid;
+            border-color: var(--color-neon-green);
+            background: rgba(34, 197, 94, 0.05);
+        }
+        
+        .signature-canvas {
+            border: 1px solid var(--glass-border);
+            border-radius: 5px;
+            background: white;
+        }
+        
+        .loading-spinner {
+            display: inline-block;
+            width: 20px;
+            height: 20px;
+            border: 2px solid rgba(255, 255, 255, 0.3);
+            border-radius: 50%;
+            border-top-color: var(--color-neon-teal);
+            animation: spin 1s ease-in-out infinite;
+        }
+        
+        @keyframes spin {
+            to { transform: rotate(360deg); }
+        }
+        
+        .error-message {
+            background: rgba(239, 68, 68, 0.1);
+            border: 1px solid rgba(239, 68, 68, 0.3);
+            color: #ef4444;
+            padding: 1rem;
+            border-radius: 10px;
+            margin-bottom: 1rem;
+            font-size: 0.875rem;
+        }
+        
+        .success-message {
+            background: rgba(34, 197, 94, 0.1);
+            border: 1px solid rgba(34, 197, 94, 0.3);
+            color: #22c55e;
+            padding: 1rem;
+            border-radius: 10px;
+            margin-bottom: 1rem;
+            font-size: 0.875rem;
+        }
+        
+        @media (max-width: 768px) {
+            .registration-flow-container {
+                padding: 1rem 0;
+            }
+            
+            .step-content {
+                padding: 2rem;
+                margin: 0 1rem;
+            }
+            
+            .form-row {
+                grid-template-columns: 1fr;
+            }
+            
+            .progress-indicator {
+                flex-wrap: wrap;
+                gap: 0.5rem;
+            }
+            
+            .progress-step {
+                padding: 0.5rem 1rem;
+            }
+            
+            .progress-step-text {
+                display: none;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="registration-flow-container">
+        <div class="container">
+            <!-- Flow Header -->
+            <div class="flow-header">
+                <h1 class="flow-title">Join SmartStart</h1>
+                <p class="flow-subtitle">Complete your registration to start your venture journey</p>
+                
+                <!-- Progress Indicator -->
+                <div class="progress-indicator">
+                    <div class="progress-step active" data-step="1">
+                        <div class="progress-step-number">1</div>
+                        <div class="progress-step-text">Account Info</div>
+                    </div>
+                    <div class="progress-step" data-step="2">
+                        <div class="progress-step-number">2</div>
+                        <div class="progress-step-text">Subscription</div>
+                    </div>
+                    <div class="progress-step" data-step="3">
+                        <div class="progress-step-number">3</div>
+                        <div class="progress-step-text">Legal Documents</div>
+                    </div>
+                    <div class="progress-step" data-step="4">
+                        <div class="progress-step-number">4</div>
+                        <div class="progress-step-text">Activation</div>
+                    </div>
+                </div>
+            </div>
+            
+            <!-- Message Container -->
+            <div id="messageContainer"></div>
+            
+            <!-- Step 1: Account Information -->
+            <div class="step-content" id="step1">
+                <h2 class="step-title">Account Information</h2>
+                <p class="step-description">Let's start by creating your SmartStart account</p>
+                
+                <form id="accountForm">
+                    <div class="form-row">
+                        <div class="form-group">
+                            <label for="firstName" class="form-label">First Name</label>
+                            <input type="text" id="firstName" name="firstName" class="form-input" placeholder="Enter your first name" required>
+                        </div>
+                        <div class="form-group">
+                            <label for="lastName" class="form-label">Last Name</label>
+                            <input type="text" id="lastName" name="lastName" class="form-input" placeholder="Enter your last name" required>
+                        </div>
+                    </div>
+                    
+                    <div class="form-group">
+                        <label for="email" class="form-label">Email Address</label>
+                        <input type="email" id="email" name="email" class="form-input" placeholder="Enter your email address" required>
+                    </div>
+                    
+                    <div class="form-group">
+                        <label for="company" class="form-label">Company (Optional)</label>
+                        <input type="text" id="company" name="company" class="form-input" placeholder="Enter your company name">
+                    </div>
+                    
+                    <div class="form-row">
+                        <div class="form-group">
+                            <label for="password" class="form-label">Password</label>
+                            <input type="password" id="password" name="password" class="form-input" placeholder="Create a strong password" required>
+                        </div>
+                        <div class="form-group">
+                            <label for="confirmPassword" class="form-label">Confirm Password</label>
+                            <input type="password" id="confirmPassword" name="confirmPassword" class="form-input" placeholder="Confirm your password" required>
+                        </div>
+                    </div>
+                    
+                    <div class="step-actions">
+                        <a href="../index.html" class="btn btn-secondary">
+                            <i class="fas fa-arrow-left"></i>
+                            Back to Home
+                        </a>
+                        <button type="button" class="btn btn-primary" id="step1ContinueBtn">
+                            Continue
+                        </button>
+                    </div>
+                </form>
+            </div>
+            
+            <!-- Step 2: Subscription Selection -->
+            <div class="step-content" id="step2" style="display: none;">
+                <h2 class="step-title">Choose Your Subscription</h2>
+                <p class="step-description">Select the plan that works best for your venture journey</p>
+                
+                <div class="subscription-plans">
+                    <div class="subscription-plan" data-plan="monthly">
+                        <div class="plan-header">
+                            <h3 class="plan-title">Monthly Membership</h3>
+                            <div class="plan-price">CAD $100<span style="font-size: 1rem; font-weight: 400;">/month</span></div>
+                        </div>
+                        <ul class="plan-features">
+                            <li>Full SmartStart platform access</li>
+                            <li>Venture management tools</li>
+                            <li>Legal document templates</li>
+                            <li>Community collaboration</li>
+                            <li>Cancel anytime</li>
+                        </ul>
+                    </div>
+                    
+                    <div class="subscription-plan selected" data-plan="annual">
+                        <div class="plan-header">
+                            <h3 class="plan-title">Annual Membership</h3>
+                            <div class="plan-price">CAD $1,000<span style="font-size: 1rem; font-weight: 400;">/year</span></div>
+                        </div>
+                        <ul class="plan-features">
+                            <li>Everything in Monthly plan</li>
+                            <li>2 months free (17% savings)</li>
+                            <li>Priority support</li>
+                            <li>Early access to new features</li>
+                            <li>Premium analytics</li>
+                        </ul>
+                    </div>
+                </div>
+                
+                <div class="step-actions">
+                    <button type="button" class="btn btn-secondary" id="step2BackBtn">
+                        <i class="fas fa-arrow-left"></i>
+                        Back
+                    </button>
+                    <button type="button" class="btn btn-primary" id="step2ContinueBtn">
+                        Continue
+                    </button>
+                </div>
+            </div>
+            
+            <!-- Step 3: Legal Documents -->
+            <div class="step-content" id="step3" style="display: none;">
+                <h2 class="step-title">Legal Documents</h2>
+                <p class="step-description">Review and sign the required legal documents to complete your registration</p>
+                
+                <div class="legal-documents-preview">
+                    <p style="text-align: center; margin-bottom: 2rem; color: var(--text-secondary);">
+                        You will review and sign each document individually during the activation process
+                    </p>
+                    
+                    <div class="document-item" data-document="terms">
+                        <div class="document-info">
+                            <div class="document-details">
+                                <h4>Terms of Service</h4>
+                                <p>Platform usage terms and conditions</p>
+                            </div>
+                        </div>
+                        <div class="document-status status-pending">Pending Review</div>
+                    </div>
+                    
+                    <div class="document-item" data-document="privacy">
+                        <div class="document-info">
+                            <div class="document-details">
+                                <h4>Privacy Policy</h4>
+                                <p>How we handle your personal data</p>
+                            </div>
+                        </div>
+                        <div class="document-status status-pending">Pending Review</div>
+                    </div>
+                    
+                    <div class="document-item" data-document="nda">
+                        <div class="document-info">
+                            <div class="document-details">
+                                <h4>Non-Disclosure Agreement</h4>
+                                <p>Confidentiality agreement for platform use</p>
+                            </div>
+                        </div>
+                        <div class="document-status status-pending">Pending Review</div>
+                    </div>
+                    
+                    <div class="document-item" data-document="contributor">
+                        <div class="document-info">
+                            <div class="document-details">
+                                <h4>Contributor Agreement</h4>
+                                <p>Intellectual property and collaboration terms</p>
+                            </div>
+                        </div>
+                        <div class="document-status status-pending">Pending Review</div>
+                    </div>
+                </div>
+                
+                <div class="step-actions">
+                    <button type="button" class="btn btn-secondary" id="step3BackBtn">
+                        <i class="fas fa-arrow-left"></i>
+                        Back
+                    </button>
+                    <button type="button" class="btn btn-primary" id="step3ContinueBtn">
+                        Review & Sign Documents
+                    </button>
+                </div>
+            </div>
+            
+            <!-- Step 4: Account Activation -->
+            <div class="step-content" id="step4" style="display: none;">
+                <h2 class="step-title">Account Activation</h2>
+                <p class="step-description">Setting up your account and processing your subscription</p>
+                
+                <div id="activationProgress">
+                    <div class="activation-step">
+                        <div class="loading-spinner"></div>
+                        <span>Creating your account...</span>
+                    </div>
+                    <div class="activation-step">
+                        <div class="loading-spinner"></div>
+                        <span>Processing subscription...</span>
+                    </div>
+                    <div class="activation-step">
+                        <div class="loading-spinner"></div>
+                        <span>Signing legal documents...</span>
+                    </div>
+                    <div class="activation-step">
+                        <div class="loading-spinner"></div>
+                        <span>Setting up your dashboard...</span>
+                    </div>
+                </div>
+                
+                <div class="step-actions" style="justify-content: center;">
+                    <button type="button" class="btn btn-primary" style="display: none;" id="completeBtn">
+                        Complete Registration
+                        <i class="fas fa-check"></i>
+                    </button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script src="../assets/js/components.js"></script>
+    <script src="../assets/js/legal-documents.js"></script>
+    <script>
+        // Registration Flow State
+        let currentStep = 1;
+        let registrationData = {
+            account: {},
+            subscription: {},
+            documents: {},
+            signatures: {},
+            user: null,
+            token: null,
+            documentsSigned: false,
+            activationCompleted: false,
+            currentState: 'initial' // initial, account_created, subscription_selected, documents_signed, activation_completed
+        };
+        
+        // Initialize the registration flow
+        document.addEventListener('DOMContentLoaded', function() {
+            restoreRegistrationState();
+            initializeRegistrationFlow();
+            setupEventListeners();
+        });
+        
+        // Restore registration state from localStorage
+        function restoreRegistrationState() {
+            const savedData = localStorage.getItem('smartstart_registration_data');
+            if (savedData) {
+                try {
+                    const parsedData = JSON.parse(savedData);
+                    // Merge saved data with current registration data
+                    Object.assign(registrationData, parsedData);
+                    console.log('Restored registration state:', registrationData);
+                    
+                    // If activation is already completed, show completion
+                    if (registrationData.activationCompleted) {
+                        currentStep = 4;
+                        document.getElementById('step4').style.display = 'block';
+                        document.querySelector('[data-step="4"]').classList.add('active');
+                        document.getElementById('completeBtn').style.display = 'inline-flex';
+                    }
+                } catch (error) {
+                    console.error('Failed to restore registration state:', error);
+                }
+            }
+        }
+        
+        function setupEventListeners() {
+            // Step 1 buttons
+            document.getElementById('step1ContinueBtn').addEventListener('click', nextStep);
+            
+            // Step 2 buttons
+            document.getElementById('step2BackBtn').addEventListener('click', previousStep);
+            document.getElementById('step2ContinueBtn').addEventListener('click', nextStep);
+            
+            // Step 3 buttons
+            document.getElementById('step3BackBtn').addEventListener('click', previousStep);
+            document.getElementById('step3ContinueBtn').addEventListener('click', openLegalDocumentsSystem);
+            
+            // Step 4 button
+            document.getElementById('completeBtn').addEventListener('click', completeRegistration);
+        }
+        
+        function initializeRegistrationFlow() {
+            // Set up subscription plan selection
+            document.querySelectorAll('.subscription-plan').forEach(plan => {
+                plan.addEventListener('click', function() {
+                    document.querySelectorAll('.subscription-plan').forEach(p => p.classList.remove('selected'));
+                    this.classList.add('selected');
+                    registrationData.subscription.plan = this.dataset.plan;
+                    registrationData.subscription.price = this.dataset.plan === 'annual' ? 1000 : 100;
+                    registrationData.subscription.currency = 'CAD';
+                    registrationData.subscription.billing = this.dataset.plan === 'annual' ? 'yearly' : 'monthly';
+                });
+            });
+            
+            // Set default subscription
+            registrationData.subscription.plan = 'annual';
+            registrationData.subscription.price = 1000;
+            registrationData.subscription.currency = 'CAD';
+            registrationData.subscription.billing = 'yearly';
+        }
+        
+        function nextStep() {
+            if (validateCurrentStep()) {
+                if (currentStep < 4) {
+                    // Hide current step
+                    document.getElementById(`step${currentStep}`).style.display = 'none';
+                    
+                    // Update progress indicator
+                    document.querySelector(`[data-step="${currentStep}"]`).classList.remove('active');
+                    document.querySelector(`[data-step="${currentStep}"]`).classList.add('completed');
+                    
+                    // Move to next step
+                    currentStep++;
+                    
+                    // Show next step
+                    document.getElementById(`step${currentStep}`).style.display = 'block';
+                    document.querySelector(`[data-step="${currentStep}"]`).classList.add('active');
+                    
+                    // Handle step-specific logic with state management
+                    if (currentStep === 2) {
+                        registrationData.currentState = 'subscription_selected';
+                    } else if (currentStep === 3) {
+                        registrationData.currentState = 'documents_ready';
+                    } else if (currentStep === 4 && !registrationData.activationCompleted) {
+                        // Only start activation if not already completed
+                        startActivationProcess();
+                    }
+                }
+            }
+        }
+        
+        function previousStep() {
+            if (currentStep > 1) {
+                // Hide current step
+                document.getElementById(`step${currentStep}`).style.display = 'none';
+                
+                // Update progress indicator
+                document.querySelector(`[data-step="${currentStep}"]`).classList.remove('active');
+                
+                // Move to previous step
+                currentStep--;
+                
+                // Show previous step
+                document.getElementById(`step${currentStep}`).style.display = 'block';
+                document.querySelector(`[data-step="${currentStep}"]`).classList.add('active');
+            }
+        }
+        
+        function validateCurrentStep() {
+            if (currentStep === 1) {
+                const form = document.getElementById('accountForm');
+                const formData = new FormData(form);
+                
+                // Validate required fields
+                const firstName = document.getElementById('firstName').value.trim();
+                const lastName = document.getElementById('lastName').value.trim();
+                const email = document.getElementById('email').value.trim();
+                const password = document.getElementById('password').value;
+                const confirmPassword = document.getElementById('confirmPassword').value;
+                
+                if (!firstName || !lastName || !email || !password || !confirmPassword) {
+                    showMessage('Please fill in all required fields', 'error');
+                    return false;
+                }
+                
+                if (password !== confirmPassword) {
+                    showMessage('Passwords do not match', 'error');
+                    return false;
+                }
+                
+                if (password.length < 8) {
+                    showMessage('Password must be at least 8 characters long', 'error');
+                    return false;
+                }
+                
+                // Store account data
+                registrationData.account = {
+                    firstName,
+                    lastName,
+                    email,
+                    password,
+                    company: document.getElementById('company').value.trim() || null
+                };
+                
+                return true;
+            } else if (currentStep === 2) {
+                if (!registrationData.subscription.plan) {
+                    showMessage('Please select a subscription plan', 'error');
+                    return false;
+                }
+                return true;
+            } else if (currentStep === 3) {
+                // Legal documents validation will be handled in the activation process
+                return true;
+            }
+            
+            return true;
+        }
+        
+        async function startActivationProcess() {
+            // Prevent multiple activations
+            if (registrationData.activationCompleted) {
+                console.log('Activation already completed, skipping...');
+                return;
+            }
+            
+            const steps = document.querySelectorAll('#activationProgress .activation-step');
+            
+            try {
+                // Step 1: Create account (if not already created)
+                if (!registrationData.user) {
+                    await simulateProgress(steps[0], 2000);
+                    await createAccount();
+                } else {
+                    console.log('Account already created, skipping...');
+                    steps[0].classList.add('completed');
+                }
+                
+                // Step 2: Process subscription (if not already processed)
+                if (!registrationData.subscriptionData) {
+                    await simulateProgress(steps[1], 1500);
+                    await processSubscription();
+                } else {
+                    console.log('Subscription already processed, skipping...');
+                    steps[1].classList.add('completed');
+                }
+                
+                // Step 3: Sign documents (if not already signed)
+                if (!registrationData.documentsSigned) {
+                    await simulateProgress(steps[2], 2500);
+                    await signDocuments();
+                } else {
+                    console.log('Documents already signed, skipping...');
+                    steps[2].classList.add('completed');
+                }
+                
+                // Step 4: Setup dashboard
+                await simulateProgress(steps[3], 1000);
+                await setupDashboard();
+                
+                // Mark activation as completed
+                registrationData.activationCompleted = true;
+                registrationData.currentState = 'activation_completed';
+                
+                // Save final state
+                localStorage.setItem('smartstart_registration_data', JSON.stringify(registrationData));
+                
+                // Show completion button
+                document.getElementById('completeBtn').style.display = 'inline-flex';
+                
+            } catch (error) {
+                console.error('Activation failed:', error);
+                showMessage('Registration failed. Please try again.', 'error');
+            }
+        }
+        
+        async function simulateProgress(stepElement, duration) {
+            return new Promise((resolve) => {
+                setTimeout(() => {
+                    const spinner = stepElement.querySelector('.loading-spinner');
+                    const text = stepElement.querySelector('span');
+                    
+                    spinner.style.display = 'none';
+                    text.textContent = text.textContent.replace('...', ' ✓');
+                    stepElement.style.color = '#22c55e';
+                    
+                    resolve();
+                }, duration);
+            });
+        }
+        
+    async function createAccount() {
+        try {
+            console.log('Creating real account with backend API...');
+            
+            const response = await fetch('http://localhost:3344/api/auth/register', {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json',
+                },
+                body: JSON.stringify({
+                    email: registrationData.account.email,
+                    password: registrationData.account.password,
+                    firstName: registrationData.account.firstName,
+                    lastName: registrationData.account.lastName,
+                    company: registrationData.account.company,
+                    role: 'user'
+                })
+            });
+
+            if (!response.ok) {
+                const errorData = await response.json();
+                throw new Error(errorData.error?.message || 'Account creation failed');
+            }
+
+            const result = await response.json();
+            
+            if (result.success) {
+                registrationData.user = result.data.user;
+                registrationData.token = result.data.token;
+                console.log('Real account created:', registrationData.user);
+            } else {
+                throw new Error(result.error?.message || 'Account creation failed');
+            }
+            
+        } catch (error) {
+            console.error('Account creation failed:', error);
+            // Fallback to demo mode if backend is not available
+            console.log('Falling back to demo mode...');
+            registrationData.user = {
+                id: 'demo_user_' + Date.now(),
+                email: registrationData.account.email,
+                firstName: registrationData.account.firstName,
+                lastName: registrationData.account.lastName,
+                role: 'user',
+                createdAt: new Date().toISOString()
+            };
+            registrationData.token = 'demo_token_' + Date.now();
+            console.log('Demo account created:', registrationData.user);
+        }
+    }
+        
+        async function processSubscription() {
+            try {
+                // In a real implementation, this would integrate with Stripe or another payment processor
+                const subscriptionData = {
+                    userId: registrationData.user.id,
+                    plan: registrationData.subscription.plan,
+                    price: registrationData.subscription.price,
+                    currency: registrationData.subscription.currency,
+                    billing: registrationData.subscription.billing,
+                    status: 'active'
+                };
+                
+                // Store subscription data (would be saved to database in real implementation)
+                registrationData.subscriptionData = subscriptionData;
+                
+            } catch (error) {
+                console.error('Subscription processing failed:', error);
+                throw error;
+            }
+        }
+        
+        async function signDocuments() {
+            try {
+                // Ensure user data exists for legal documents
+                if (!registrationData.user) {
+                    console.log('Creating mock user for legal documents step...');
+                    registrationData.user = {
+                        id: 'demo_user_' + Date.now(),
+                        email: registrationData.account.email,
+                        firstName: registrationData.account.firstName,
+                        lastName: registrationData.account.lastName,
+                        role: 'user',
+                        createdAt: new Date().toISOString()
+                    };
+                }
+                
+                // For now, just show the legal documents step
+                // The actual signing will happen when user clicks "Review & Sign Documents"
+                console.log('Legal documents step ready - waiting for user to click Review & Sign Documents');
+                
+                // Update UI to show documents are ready for review
+                const documents = ['terms', 'privacy', 'nda', 'contributor'];
+                documents.forEach(docType => {
+                    const docElement = document.querySelector(`[data-document="${docType}"]`);
+                    if (docElement) {
+                        const statusElement = docElement.querySelector('.document-status');
+                        statusElement.textContent = 'Ready for Review';
+                        statusElement.className = 'document-status status-ready';
+                    }
+                });
+                
+            } catch (error) {
+                console.error('Document signing failed:', error);
+                throw error;
+            }
+        }
+        
+        async function openLegalDocumentsSystem() {
+            try {
+                console.log('Opening legal documents system...');
+                
+                // Prevent multiple initializations
+                if (window.legalDocumentsSystemActive) {
+                    console.log('Legal documents system already active, skipping...');
+                    return;
+                }
+                
+                // Mark as active
+                window.legalDocumentsSystemActive = true;
+                
+                // Ensure user data exists - create mock user if not present
+                if (!registrationData.user) {
+                    console.log('Creating mock user for legal documents...');
+                    registrationData.user = {
+                        id: 'demo_user_' + Date.now(),
+                        email: registrationData.account.email,
+                        firstName: registrationData.account.firstName,
+                        lastName: registrationData.account.lastName,
+                        role: 'user',
+                        createdAt: new Date().toISOString()
+                    };
+                }
+                
+                if (window.LegalDocumentsSystem) {
+                    const legalDocsSystem = new window.LegalDocumentsSystem();
+                    
+                    // Set up callback for when documents are completed
+                    window.onLegalDocumentsAccepted = function() {
+                        console.log('Legal documents accepted, completing registration...');
+                        
+                        // Reset the active flag
+                        window.legalDocumentsSystemActive = false;
+                        
+                        // Update state
+                        registrationData.documentsSigned = true;
+                        registrationData.currentState = 'documents_signed';
+                        
+                        // Save to localStorage for persistence
+                        localStorage.setItem('smartstart_registration_data', JSON.stringify(registrationData));
+                        
+                        // Update UI to show all documents as signed
+                        const documents = ['terms', 'privacy', 'nda', 'contributor'];
+                        documents.forEach(docType => {
+                            const docElement = document.querySelector(`[data-document="${docType}"]`);
+                            if (docElement) {
+                                const statusElement = docElement.querySelector('.document-status');
+                                statusElement.textContent = 'Signed';
+                                statusElement.className = 'document-status status-signed';
+                            }
+                        });
+                        
+                        // Go to next step (activation) - this will trigger startActivationProcess
+                        nextStep();
+                    };
+                    
+                    // Initialize with user data - this will show the modal
+                    await legalDocsSystem.initialize({
+                        id: registrationData.user.id,
+                        name: `${registrationData.account.firstName} ${registrationData.account.lastName}`.trim(),
+                        email: registrationData.account.email,
+                        firstName: registrationData.account.firstName,
+                        lastName: registrationData.account.lastName
+                    });
+                    
+                } else {
+                    console.log('LegalDocumentsSystem not available, using mock signing...');
+                    // Fallback to mock signing if legal system not available
+                    await mockDocumentSigning();
+                    nextStep();
+                }
+                
+            } catch (error) {
+                console.error('Failed to open legal documents system:', error);
+                console.error('Error details:', error.message, error.stack);
+                alert('Failed to open legal documents. Please try again.');
+            }
+        }
+        
+        async function mockDocumentSigning() {
+            const documents = ['terms', 'privacy', 'nda', 'contributor'];
+            const signedDocuments = [];
+            
+            for (const docType of documents) {
+                const documentData = {
+                    userId: registrationData.user.id,
+                    documentType: docType,
+                    status: 'signed',
+                    signedAt: new Date().toISOString(),
+                    signatureData: generateDigitalSignature(docType),
+                    signatureHash: generateSignatureHash(docType)
+                };
+                
+                // Update UI
+                const docElement = document.querySelector(`[data-document="${docType}"]`);
+                if (docElement) {
+                    const statusElement = docElement.querySelector('.document-status');
+                    statusElement.textContent = 'Signed';
+                    statusElement.className = 'document-status status-signed';
+                }
+                
+                signedDocuments.push(documentData);
+                
+                // Simulate signing delay
+                await new Promise(resolve => setTimeout(resolve, 500));
+            }
+            
+            registrationData.documents = signedDocuments;
+        }
+        
+        function completeDocumentSigning() {
+            // This will be called when the real legal documents system completes
+            console.log('Legal documents completed successfully');
+        }
+        
+        async function setupDashboard() {
+            try {
+                // Store user session
+                const sessionData = {
+                    userId: registrationData.user.id,
+                    email: registrationData.user.email,
+                    name: `${registrationData.account.firstName} ${registrationData.account.lastName}`.trim(),
+                    token: registrationData.token,
+                    subscription: registrationData.subscription,
+                    documents: registrationData.documents
+                };
+                
+                localStorage.setItem('user', JSON.stringify(sessionData));
+                localStorage.setItem('smartstart_token', registrationData.token);
+                
+            } catch (error) {
+                console.error('Dashboard setup failed:', error);
+                throw error;
+            }
+        }
+        
+        function generateDigitalSignature(documentType) {
+            // Generate a mock digital signature
+            const signatureData = {
+                documentType,
+                userId: registrationData.user.id,
+                timestamp: new Date().toISOString(),
+                signature: `digital_signature_${documentType}_${Date.now()}`
+            };
+            
+            return JSON.stringify(signatureData);
+        }
+        
+        function generateSignatureHash(documentType) {
+            // Generate a mock signature hash (client-side compatible)
+            const data = `${documentType}_${registrationData.user.id}_${new Date().toISOString()}`;
+            // Simple hash function for demo purposes
+            let hash = 0;
+            for (let i = 0; i < data.length; i++) {
+                const char = data.charCodeAt(i);
+                hash = ((hash << 5) - hash) + char;
+                hash = hash & hash; // Convert to 32-bit integer
+            }
+            return Math.abs(hash).toString(16);
+        }
+        
+        async function completeRegistration() {
+            try {
+                // Save final registration data to localStorage for dashboard
+                const finalUserData = {
+                    id: registrationData.user.id,
+                    email: registrationData.account.email,
+                    firstName: registrationData.account.firstName,
+                    lastName: registrationData.account.lastName,
+                    name: `${registrationData.account.firstName} ${registrationData.account.lastName}`.trim(),
+                    role: 'user',
+                    company: registrationData.account.company,
+                    subscription: registrationData.subscription,
+                    documentsSigned: registrationData.documentsSigned,
+                    registrationCompleted: true,
+                    loginTime: new Date().toISOString()
+                };
+                
+                // Save user data for dashboard
+                localStorage.setItem('smartstart_user', JSON.stringify(finalUserData));
+                localStorage.setItem('smartstart_token', registrationData.token);
+                
+                // Clear registration data
+                localStorage.removeItem('smartstart_registration_data');
+                
+                console.log('Registration completed successfully:', finalUserData);
+                showMessage('Registration completed successfully! Redirecting to dashboard...', 'success');
+                
+                setTimeout(() => {
+                    window.location.href = '../dashboard.html';
+                }, 2000);
+                
+            } catch (error) {
+                console.error('Registration completion failed:', error);
+                showMessage('Failed to complete registration. Please try again.', 'error');
+            }
+        }
+        
+        function showMessage(message, type = 'error') {
+            const container = document.getElementById('messageContainer');
+            const messageDiv = document.createElement('div');
+            messageDiv.className = type === 'error' ? 'error-message' : 'success-message';
+            messageDiv.textContent = message;
+            
+            container.innerHTML = '';
+            container.appendChild(messageDiv);
+            
+            // Auto-hide success messages
+            if (type === 'success') {
+                setTimeout(() => {
+                    messageDiv.remove();
+                }, 5000);
+            }
+        }
+    </script>
+</body>
+</html>

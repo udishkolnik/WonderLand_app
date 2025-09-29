@@ -1,0 +1,295 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+ <meta charset="UTF-8">
+ <meta name="viewport" content="width=device-width, initial-scale=1.0">
+ <title>Dashboard - SmartStart Platform | AliceSolutionsGroup</title>
+    <meta name="description" content="Your SmartStart Platform dashboard - manage ventures, track progress, and collaborate with your team.">
+    <meta name="keywords" content="dashboard, SmartStart, AliceSolutionsGroup, ventures, progress">
+ <meta name="author" content="Udi Shkolnik, AliceSolutionsGroup">
+    <meta name="robots" content="noindex, nofollow">
+ 
+ <link rel="stylesheet" href="assets/css/styles.css">
+    <link rel="icon" type="image/svg+xml" href="favicon.svg">
+    <link rel="icon" type="image/x-icon" href="favicon.ico">
+    <link rel="shortcut icon" href="favicon.ico">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+</head>
+<body>
+    <!-- App Header -->
+    <div id="app-header"></div>
+
+    <!-- Main Content -->
+    <main class="main-content">
+  <div class="container">
+   <!-- Dashboard Header -->
+   <div class="dashboard-header">
+    <div class="dashboard-welcome">
+     <div class="welcome-text">
+                        <h1 id="welcomeTitle">Welcome back, <span id="user-name">User</span></h1>
+      <p id="welcomeSubtitle">Ready to continue your SmartStart journey?</p>
+     </div>
+     <div class="user-avatar" id="userAvatar">U</div>
+    </div>
+                <div class="header-actions">
+                    <button class="btn btn-primary" id="create-venture-btn">
+                        New Venture
+                    </button>
+                </div>
+   </div>
+
+                <!-- Dashboard Stats with Advanced Analytics -->
+                <div class="stats-grid">
+                    <div class="stat-card venture-stat">
+                        <div class="stat-icon">🚀</div>
+                        <div class="stat-content">
+                            <div class="stat-value" id="totalVentures">0</div>
+                            <div class="stat-label">Active Ventures</div>
+                            <div class="stat-trend" id="ventureTrend">+2 this month</div>
+                        </div>
+                    </div>
+                    <div class="stat-card equity-stat">
+                        <div class="stat-icon">📈</div>
+                        <div class="stat-content">
+                            <div class="stat-value" id="equityValue">$0</div>
+                            <div class="stat-label">Portfolio Value</div>
+                            <div class="stat-trend" id="equityTrend">+15% growth</div>
+                        </div>
+                    </div>
+                    <div class="stat-card collaboration-stat">
+                        <div class="stat-icon">👥</div>
+                        <div class="stat-content">
+                            <div class="stat-value" id="activeCollaborations">0</div>
+                            <div class="stat-label">Team Members</div>
+                            <div class="stat-trend" id="collaborationTrend">3 new this week</div>
+    </div>
+    </div>
+                    <div class="stat-card success-stat">
+                        <div class="stat-icon">✅</div>
+                        <div class="stat-content">
+                            <div class="stat-value" id="successRate">0%</div>
+                            <div class="stat-label">Success Rate</div>
+                            <div class="stat-trend" id="successTrend">Above average</div>
+    </div>
+    </div>
+   </div>
+
+   <!-- Dashboard Content -->
+   <div class="dashboard-content">
+    <div class="main-content">
+     <!-- Journey Progress -->
+                    <div class="card">
+      <div class="card-header">
+       <h2 class="card-title">Your Journey Progress</h2>
+                            <a href="user-journey/interactive-journey.html" class="btn btn-ghost btn-sm">View Full Journey</a>
+                        </div>
+                        <div class="journey-progress">
+                            <div class="journey-stage">
+                                <div class="stage-info">
+                                    <h3>Discovery</h3>
+                                    <p>3 ventures, 1 completed</p>
+                                </div>
+                                <div class="stage-status completed">Completed</div>
+                            </div>
+                            <div class="journey-stage">
+                                <div class="stage-info">
+                                    <h3>Development</h3>
+                                    <p>Building your MVP</p>
+                                </div>
+                                <div class="stage-status in-progress">In Progress</div>
+                            </div>
+                            <div class="journey-stage">
+                                <div class="stage-info">
+                                    <h3>Launch</h3>
+                                    <p>Ready for market</p>
+                                </div>
+                                <div class="stage-status pending">Pending</div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Venture Collaboration Hub -->
+                    <div class="card collaboration-hub glass">
+                        <div class="card-header">
+                            <h2 class="card-title">
+                                <i class="fas fa-users-cog"></i>
+                                Venture Collaboration Hub
+                            </h2>
+                            <div class="header-actions">
+                                <button class="btn btn-ghost btn-sm" id="refreshCollaborations">Refresh</button>
+                                <button class="btn btn-primary btn-sm" id="createVenture">
+                                    <i class="fas fa-plus"></i>
+                                    New Venture
+                                </button>
+                            </div>
+                        </div>
+                        <div class="collaboration-grid">
+                            <div class="collaboration-card">
+                                <div class="collaboration-header">
+                                    <h3>Active Collaborations</h3>
+                                    <span class="badge success">3 Active</span>
+                                </div>
+                                <div class="collaboration-list">
+                                    <div class="collaboration-item">
+                                        <div class="collaboration-avatar">
+                                            <span>BC</span>
+                                        </div>
+                                        <div class="collaboration-info">
+                                            <h4>Clinic CRM</h4>
+                                            <p>Brian Chen • Lead Developer</p>
+                                            <div class="collaboration-progress">
+                                                <div class="progress-bar">
+                                                    <div class="progress-fill" style="width: 75%"></div>
+                                                </div>
+                                                <span>75% Complete</span>
+                                            </div>
+                                        </div>
+                                        <div class="collaboration-actions">
+                                            <button class="btn btn-sm btn-ghost">View Board</button>
+                                        </div>
+                                    </div>
+                                    <div class="collaboration-item">
+                                        <div class="collaboration-avatar">
+                                            <span>AS</span>
+                                        </div>
+                                        <div class="collaboration-info">
+                                            <h4>AI Assistant</h4>
+                                            <p>Alice Smith • Product Manager</p>
+                                            <div class="collaboration-progress">
+                                                <div class="progress-bar">
+                                                    <div class="progress-fill" style="width: 40%"></div>
+                                                </div>
+                                                <span>40% Complete</span>
+                                            </div>
+                                        </div>
+                                        <div class="collaboration-actions">
+                                            <button class="btn btn-sm btn-ghost">View Board</button>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            
+                            <div class="collaboration-card">
+                                <div class="collaboration-header">
+                                    <h3>Available Opportunities</h3>
+                                    <span class="badge info">2 Open</span>
+                                </div>
+                                <div class="opportunity-list">
+                                    <div class="opportunity-item">
+                                        <div class="opportunity-icon">🚀</div>
+                                        <div class="opportunity-content">
+                                            <h4>EcoTracker SaaS</h4>
+                                            <p>Carbon footprint tracking for businesses</p>
+                                            <div class="opportunity-meta">
+                                                <span class="skill-tag">React</span>
+                                                <span class="skill-tag">Node.js</span>
+                                                <span class="skill-tag">Design</span>
+                                            </div>
+                                        </div>
+                                        <button class="btn btn-sm btn-primary">Join Venture</button>
+                                    </div>
+                                    <div class="opportunity-item">
+                                        <div class="opportunity-icon">💡</div>
+                                        <div class="opportunity-content">
+                                            <h4>Local Marketplace</h4>
+                                            <p>Hyperlocal buying and selling platform</p>
+                                            <div class="opportunity-meta">
+                                                <span class="skill-tag">Mobile</span>
+                                                <span class="skill-tag">Backend</span>
+                                                <span class="skill-tag">Marketing</span>
+                                            </div>
+                                        </div>
+                                        <button class="btn btn-sm btn-primary">Join Venture</button>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- AI-Powered Venture Insights -->
+                    <div class="card ai-recommendations glass">
+                        <div class="card-header">
+                            <h2 class="card-title">
+                                <i class="fas fa-brain"></i>
+                                AI Venture Insights
+                            </h2>
+                            <button class="btn btn-ghost btn-sm" id="refreshAI">Refresh</button>
+                        </div>
+                        <div class="ai-insights" id="aiInsights">
+                            <div class="insight-item">
+                                <div class="insight-icon">💡</div>
+                                <div class="insight-content">
+                                    <h4>Market Opportunity Detected</h4>
+                                    <p>Based on your skills, we found 3 trending opportunities in fintech</p>
+                                </div>
+                            </div>
+                            <div class="insight-item">
+                                <div class="insight-icon">👥</div>
+                                <div class="insight-content">
+                                    <h4>Team Match Found</h4>
+                                    <p>Sarah Chen (Full-stack dev) is looking for a co-founder for her AI project</p>
+                                </div>
+      </div>
+      </div>
+     </div>
+
+                    <!-- Recent Ventures with Advanced Analytics -->
+                    <div class="card glass">
+      <div class="card-header">
+                            <h2 class="card-title">Your Ventures</h2>
+                            <div class="header-actions">
+                                <button class="btn btn-secondary btn-sm" id="filterVentures">Filter</button>
+                                <a href="ventures.html" class="btn btn-ghost btn-sm">View All</a>
+                            </div>
+      </div>
+      <div class="ventures-list" id="venturesList">
+                            <!-- Enhanced venture items will be loaded here -->
+      </div>
+     </div>
+    </div>
+
+                <!-- Sidebar -->
+    <div class="sidebar">
+     <!-- Quick Actions -->
+     <div class="content-card">
+      <div class="card-header">
+       <h2 class="card-title">Quick Actions</h2>
+      </div>
+      <div class="quick-actions">
+       <a href="user-journey/interactive-journey.html" class="quick-action">
+        <div class="quick-action-text">Interactive Journey</div>
+       </a>
+                            <a href="user-journey/decision-gate.html" class="quick-action">
+                                <div class="quick-action-text">Decision Gate</div>
+                            </a>
+                            <a href="user-journey/mvp-build.html" class="quick-action">
+                                <div class="quick-action-text">MVP Builder</div>
+       </a>
+      </div>
+     </div>
+      </div>
+     </div>
+    </div>
+    </main>
+ 
+    <!-- Footer -->
+ <footer class="footer">
+  <div class="container">
+            <p>&copy; 2025 AliceSolutionsGroup. All rights reserved. | SmartStart by Udi Shkolnik</p>
+  </div>
+ </footer>
+
+    <!-- Notification Container -->
+    <div class="notification-container" id="notification-container"></div>
+
+    <!-- Scripts -->
+    <script src="assets/js/error-handler.js"></script>
+ <script src="assets/js/components.js"></script>
+    <script src="assets/js/header-loader.js"></script>
+    <script src="assets/js/microinteractions.js"></script>
+ <script src="assets/js/dashboard.js"></script>
+</body>
+</html>
